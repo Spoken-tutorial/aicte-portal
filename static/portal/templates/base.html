@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>                                                                 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aicte Portal</title>
+    <link rel="stylesheet" href="{% static 'portal/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'portal/css/main.css' %}">
+</head>
+<body>
+    <div id="header-wrapper">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div id="header-inner">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Aicte Portal</a> 
+                    </div> <!-- /.navbar-header -->
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome {{ user }} ! <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                   <li> <a href="{% url 'user_logout' %}">Logout</a></li> 
+                                </ul>
+                            </li> <!-- /.dropdown -->
+                        {% else %}
+                            <li><a href="{% url 'user_login' %}">Login</a></li>
+                            <li><a href="#">Register</a></li>
+                        {% endif %}
+                        </ul>
+                    </div> <!-- /.collapse -->
+                </div> <!-- /.container-fluid -->
+            </div> <!-- /#header-inner -->
+        </nav>
+    </div> <!-- /#header-wrapper -->
+
+    <div id="content-wrapper">
+        <div id="content-inner">
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div> <!-- /#content-inner -->
+    </div> <!-- /#content-wrapper -->
+
+    <div id="footer-wrapper">
+        <div id="footer-inner">
+        </div> <!-- /#footer-inner -->
+    </div> <!-- /#footer-wrapper -->
+    <script src="{% static 'portal/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'portal/js/bootstrap.min.js' %}"></script>
+    {% block jsblock %}
+    {% endblock %}
+</body>
+</html>
