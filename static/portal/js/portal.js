@@ -80,3 +80,10 @@ $(document).ready(function(){
         });
     });
 });
+
+$('.date').datetimepicker({
+	lang:'en',
+	timepicker:false,
+	format:'Y-m-d',
+	formatDate:'Y/m/d',
+});
