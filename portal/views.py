@@ -118,7 +118,7 @@ def organisation(request):
     appDetails = base_data[2]
     alert_success = ''
     alert_danger = ''
-
+    rid = 0
     if request.method == 'POST':
         form = OrganisationForm(request.POST)
         if form.is_valid():
@@ -139,14 +139,60 @@ def organisation(request):
         form = OrganisationForm()
         if is_edit:
             form = OrganisationForm(instance = application_year.organisation)
+            rid = application_year.organisation.id
     context = {
         'form': form,
+        'rid': rid,
         'appDetails': appDetails,
         'alert_success': alert_success,
         'alert_danger': alert_danger
     }
     return render(request, 'portal/templates/organisation.html', context)
 
+def trustee(request, organisation_id, trustee_id = None):
+    if request.method == 'POST':
+        form = TrusteeForm(request.POST)
+        if form.is_valid():
+            trustee = Trustee()
+            if trustee_id:
+                trustee.id = trustee_id
+            trustee.organisation_id = organisation_id
+            trustee.title = form.cleaned_data['title']
+            trustee.first_name = form.cleaned_data['first_name']
+            trustee.middle_name = form.cleaned_data['middle_name']
+            trustee.last_name = form.cleaned_data['last_name']
+            trustee.designation = form.cleaned_data['designation']
+            trustee.dob = form.cleaned_data['dob']
+            trustee.trustee_since = form.cleaned_data['trustee_since']
+            trustee.trustee_till = form.cleaned_data['trustee_till']
+            trustee.phone = form.cleaned_data['phone']
+            trustee.email = form.cleaned_data['email']
+            trustee.pan = form.cleaned_data['pan']
+            trustee.profession = form.cleaned_data['profession']
+            trustee.academic_qualification = form.cleaned_data['academic_qualification']
+            trustee.state = form.cleaned_data['state']
+            trustee.district = form.cleaned_data['district']
+            trustee.location = form.cleaned_data['location']
+            trustee.city = form.cleaned_data['city']
+            trustee.address1 = form.cleaned_data['address1']
+            trustee.address2 = form.cleaned_data['address2']
+            trustee.std_code = form.cleaned_data['std_code']
+            trustee.land_phone = form.cleaned_data['land_phone']
+            trustee.cell_phone = form.cleaned_data['cell_phone']
+            trustee.save()
+            
+    else:
+        form = TrusteeForm()
+        if trustee_id:
+            try:
+                trustee = Trustee.objects.get(pk = trustee_id)
+                form = TrusteeForm(instance = trustee)
+            except:
+                print "404"
+    context = {
+        'form': form,
+    }
+    return render(request, 'portal/templates/trustee.html', context)
 
 #Ajax Request and Responces
 @csrf_exempt

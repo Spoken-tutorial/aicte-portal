@@ -8,6 +8,8 @@ urlpatterns = patterns('',
     url(r'^$', 'portal.views.home', name='home'),
     url(r'^extension/$', 'portal.views.extension', name='extension'),
     url(r'^organisation/$', 'portal.views.organisation', name='organisation'),
+    url(r'^trustee/(\d+)/$', 'portal.views.trustee', name='trustee'),
+    url(r'^trustee/(\d+)/(\d+)/$', 'portal.views.trustee', name='edittrustee'),
     
     #Ajax
     url(r'^ajax-state/$', 'portal.views.ajax_state', name='ajax_state'),

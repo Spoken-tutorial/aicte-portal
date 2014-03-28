@@ -10,12 +10,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Organisation Details</h3>
-                    <dl class="dl-horizontal">
-                        <dt>Application Number</dt><dd>{{appDetails.application}}</dd>
-                        <dt>Academic Year</dt><dd>{{appDetails.academic_year}}</dd>
-                        <dt>Status</dt><dd>{{appDetails.status}}</dd>
-                    </dl>
+                    <h3 class="panel-title">Trustee Details</h3>
                 </div>
                 <div class="panel-body">
                     {% if alert_success %}
@@ -31,8 +26,8 @@
                         </div>
                     {% endif %}
                     <form role="form" action="" method="POST"> {% csrf_token %}
-                        {{ form.errors }}
-                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        {{ form }}
+                        <!--{% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -113,40 +108,11 @@
                                     {% render_field form.website class+='form-control' %}
                                 </div>
                             </div> <!-- /.col -->
-                        </div> <!-- /.row  -->
-                        {% endwith %}
+                        <!--</div> <!-- /.row  -->
+                        <!--{% endwith %} -->
                         <input class="btn btn-lg btn-primary col-lg-2" type="submit">
                     </form>
                 </div>
-                {% if rid %}
-                    <a class = "btn btn-primary" href="{% url 'portal:trustee' rid %}">New</a>
-                    <div class="table-responsive">
-                        <table class="table">
-                            {% with trustees=user|get_trustee %}
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Designation</th>
-                                        <th>Since</th>
-                                        <th>Till</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                {% for trustee in trustees %}
-                                    <tr>
-                                        <td>{{ trustee.title }} {{ trustee.first_name }} {{ trustee.middle_name }} {{ trustee.last_name }}</td>
-                                        <td>{{ trustee.designation }}</td>
-                                        <td>{{ trustee.trustee_since }}</td>
-                                        <td>{{ trustee.trustee_till }}</td>
-                                        <td>{{ trustee.phone }}</td>
-                                        <td>{{ trustee.email }}</td>
-                                        <td><a href="{% url 'portal:edittrustee' trustee.organisation_id trustee.id %}">Edit</a></td>
-                                    </tr>
-                                {% endfor %}
-                            {% endwith %}
-                        </table>
-                    </div>
-                {% endif %}
             </div> <!-- /.panel -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->

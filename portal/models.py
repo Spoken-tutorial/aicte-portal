@@ -64,12 +64,12 @@ class InstitutionDetail(models.Model):
     district = models.ForeignKey(District)
     location = models.ForeignKey(Location)
     city = models.ForeignKey(City)
-    first_course_year = models.IntegerField()
+    first_course_year = models.IntegerField(max_length=4)
     institution_type = models.ForeignKey(InstitutionType)
     unaided_courses = models.BooleanField()
     women_institute = models.BooleanField()
     co_ed = models.BooleanField()
-    std_code = models.CharField(max_length = 15)
+    std_code = models.IntegerField(max_length = 15)
     land_phone = models.CharField(max_length = 15)
     cell_phone = models.CharField(max_length = 15)
     fax_number = models.CharField(max_length = 30)
@@ -86,8 +86,6 @@ class OrganisationType(models.Model):
     name = models.CharField(max_length = 100)
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
-    def __unicode__(self):
-        return self.name
 
 class Organisation(models.Model):
     name = models.CharField(max_length = 200)
@@ -115,12 +113,12 @@ class Trustee(models.Model):
     organisation = models.ForeignKey(Organisation)
     title = models.CharField(max_length = 200)
     first_name = models.CharField(max_length = 200)
-    middel_name = models.CharField(max_length = 200)
-    lase_name = models.CharField(max_length = 200)
+    middle_name = models.CharField(max_length = 200)
+    last_name = models.CharField(max_length = 200)
     designation = models.CharField(max_length = 200)
     dob = models.DateField()
     trustee_since = models.DateField()
-    trustee_till = models.DateField()
+    trustee_till = models.DateField(null = True)
     phone = models.CharField(max_length = 15)
     email = models.EmailField(max_length = 255)
     pan = models.CharField(max_length = 200)
@@ -280,6 +278,35 @@ class CourseDetail(models.Model):
     board_recommendation = models.PositiveSmallIntegerField()
     course_type = models.PositiveSmallIntegerField()
     mode_of_conduct = models.PositiveSmallIntegerField()
+
+class Faculty(models.Model):
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add = True)
+    updated = models.DateTimeField(auto_now = True)
+
+class FacultyDetail(models.Model):
+    faculty = models.ForeignKey(Faculty)
+    title = models.CharField(max_length = 10)
+    first_name = models.CharField(max_length = 255)
+    middel_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length = 255)
+    gender = models.CharField(max_length = 10)
+    father_name = models.CharField(max_length = 255)
+    mother_name = models.CharField(max_length = 255)
+    date_of_birth = models.DateField()
+    current_age = models.IntegerField()
+    address1 = models.TextField()
+    address2 = models.TextField()
+    state = models.ForeignKey(State)
+    district = models.ForeignKey(District)
+    location = models.ForeignKey(Location)
+    city = models.ForeignKey(City)
+    caste = models.PositiveSmallIntegerField()
+    left_institute = models.BooleanField()
+    relieved_date = models.DateField()
+    pan_number = models.CharField(max_length = 255)
+    std_code = models.CharField(max_length = 10)
+
 
 class Application(models.Model):
     institution_number = models.CharField(max_length = 255, unique = True)
