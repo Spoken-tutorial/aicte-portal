@@ -9,13 +9,13 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Institution Details</h3>
+                    <h3 class="panel-title">Organisation Details</h3>
                     <dl class="dl-horizontal">
                         <dt>Application Number</dt><dd>{{appDetails.application}}</dd>
                         <dt>Academic Year</dt><dd>{{appDetails.academic_year}}</dd>
                         <dt>Status</dt><dd>{{appDetails.status}}</dd>
                     </dl>
-                </div> <!-- /#panel-heading -->
+                </div>
                 <div class="panel-body">
                     {% if alert_success %}
                         <div class="alert alert-success alert-dismissable">
@@ -35,14 +35,34 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="institution_name">Institution Name</label>
-                                    {{ form.institution_name.errors }}
-                                    {% render_field form.institution_name  class+='form-control' %}
+                                    <label for="name">Organisation Name</label>
+                                    {{ form.name.errors }}
+                                    {% render_field form.name class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="institution_address">Institution Address</label>
-                                    {{ form.institution_address.errors }}
-                                    {% render_field form.institution_address class+='form-control' %}
+                                    <label for="organisation_type">Organisation Type</label>
+                                    {{ form.organisation_type.errors }}
+                                    {% render_field form.organisation_type class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_with">Registered With</label>
+                                    {{ form.registered_with.errors }}
+                                    {% render_field form.registered_with class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_date">Registered Date</label>
+                                    {{ form.registered_date.errors }}
+                                    {% render_field form.registered_date class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_number">Registered Number</label>
+                                    {{ form.registered_number.errors }}
+                                    {% render_field form.registered_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    {{ form.address.errors }}
+                                    {% render_field form.address class+='form-control' %}
                                 </div>
                                 <div class="form-group">
                                     <label for="state">State</label>
@@ -65,37 +85,7 @@
                                     {% render_field form.city class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="first_course_year">First Course Year</label>
-                                    {{ form.first_course_year.errors }}
-                                    {% render_field form.first_course_year class+='form-control' %}
-                                </div>
-                            </div> <!-- /.col -->
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    {{ form.institution_type.errors }}
-                                    <label for="institution_type">Institution Type</label>
-                                    {% render_field form.institution_type class+='form-control' %}
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Unaided Courses
-                                        {% render_field form.unaided_courses %}
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="women_institute" type="checkbox"> Women Institute
-                                        {% render_field form.women_institute %}
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="co_ed" type="checkbox"> Co-Ed
-                                        {% render_field form.co_ed %}
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="std_code">Std Code</label>
+                                    <label for="std_code">STD Code</label>
                                     {{ form.std_code.errors }}
                                     {% render_field form.std_code class+='form-control' %}
                                 </div>
@@ -115,26 +105,16 @@
                                     {% render_field form.fax_number class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="primary_email">Primary Email</label>
-                                    {{ form.primary_email.errors }}
-                                    {% render_field form.primary_email class+='form-control' %}
-                                </div>
-                                <div class="form-group">
-                                    <label for="secondary_email">Secondary Email</label>
-                                    {{ form.secondary_email.errors }}
-                                    {% render_field form.secondary_email class+='form-control' %}
-                                </div>
-                                <div class="form-group">
                                     <label for="website">Website</label>
                                     {{ form.website.errors }}
                                     {% render_field form.website class+='form-control' %}
                                 </div>
                             </div> <!-- /.col -->
-                        </div> <!-- /.row -->
-                        {% endwith %} 
+                        </div> <!-- /.row  -->
+                        {% endwith %}
                         <input class="btn btn-lg btn-primary col-lg-2" type="submit">
                     </form>
-                </div> <!-- /.panel-body -->
+                </div>
             </div> <!-- /.panel -->
         </div> <!-- /.col -->
     </div> <!-- /.row -->

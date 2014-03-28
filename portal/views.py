@@ -13,95 +13,140 @@ import json
 def home(request):
     return HttpResponseRedirect('/accounts/login/')
 
-@login_required
-def extension(request):
-    """ 
-    Create ontime Application number to institution. If exits use that.
-    Ceate Create a new year erxtension.
-    """
+def application_base(request, param):
     user = request.user
+    year = datetime.now()
+    application_year = ''
+    new_application = 0
     try:
        application = Application.objects.get(user_id = user.id)
-       is_new_application = 0
     except ObjectDoesNotExist:
         application = Application()
         application.user_id = user.id
-        application.application_number = user.id
+        application.institution_number = user.id
         application.save()
-        is_new_application = 1
-    
-    year = datetime.now()
-    academic_year = Application_Year.objects.filter(application = application, academic_year= year.year).last()
-    alert_danger = ''
-    appDetails = {}
+    last_year = ApplicationYear.objects.filter(application = application, academic_year = year.year-1).last()
+    application_count = ApplicationYear.objects.filter(application = application).count()
+    if not last_year:
+            new_application = 1
+    new_application_year = 1
     is_edit = 0
-    appDetails['academic_year'] = str(year.year)+' - '+str(year.year+1)
-    appDetails['application'] = application.application_number
+    if application_count >= 1:
+        application_year = ApplicationYear.objects.filter(application = application, academic_year = year.year).last()
+        if application_year:
+            try:
+                print 'Last Year: ' + str(last_year)
+                param_val = getattr(application_year, param)
+                if param_val != None:
+                    is_edit = 1
+                    if last_year and param_val == getattr(last_year, param):
+                        is_edit = 2
+                else:
+                    if last_year:
+                        setattr(application_year, param, getattr(last_year, param))
+                        application_year.save()
+                        is_edit = 2
+                new_application_year = 0
+            except:
+                is_edit = 0
+    print 'is_edit: ' + str(is_edit)
+    if new_application_year:
+        application_year = ApplicationYear()
+        application_year.user_id = user.id
+        application_year.application_id = application.id
+        application_year.academic_year = year.year
+        if new_application:
+            application_year.application_type = 1
+            application_year.chapter = 1
+        else:
+            application_year.application_type = 2
+            application_year.chapter = int(last_year.chapter) + 1
+        application_year.approval_status = 0
+        application_year.current_application_id = str(application_year.chapter) +'-'+ str(application.id)
+        application_year.application_opened = ''
+        application_year.application_submitted = ''
+        application_year.save()
+
+    appDetails = {}
+    appDetails['academic_year'] = str(year.year) + ' - ' + str(year.year + 1)
+    appDetails['application'] = application.institution_number
     appDetails['status'] = 'New'
-    if academic_year:
-        appDetails['academic year'] = str(academic_year.academic_year)+' - '+str(academic_year.academic_year+1)
-        if academic_year.academic_year == year.year:
-            is_edit = 1
+    return [application_year, is_edit, appDetails]
+
+@login_required
+def extension(request):
+    base_data = application_base(request, 'institution_id')
+    application_year = base_data[0]
+    is_edit = base_data[1]
+    appDetails = base_data[2]
+    alert_success = ''
+    alert_danger = ''
 
     if request.method == 'POST':
         form = InstitutionDetailForm(request.POST)
-        save_only_institute = 0
-        if request.POST['id']:
-            institution = Institution_Detail.objects.get(id=request.POST['id'])
-            form = InstitutionDetailForm(request.POST, instance = institution)
-            save_only_institute = 1
-        alert_success = ''
-        alert_danger = ''
         if form.is_valid():
-            # Save institution detail
-            try:
-                if save_only_institute:
-                    institution = form.save()
-                else:
-                    institution = form.save()
-                    # Save application detail
-                    application_detail = Application_Detail()
-                    application_detail.institution = institution
-                    application_detail.save()
-                
-                    # Save application year
-                    application = Application.objects.get(user = user)
-                    application_year = Application_Year()
-                    application_year.application_id = application.id
-                    application_year.application_detail_id = application_detail.id
-                    application_year.academic_year = year.year
-                    application_year.chapter = 1
-                    application_year.approval_status = 0
-                    application_year.application_type = 1
-                    application_year.application_opened = ''
-                    application_year.application_submitted = ''
-                    application_year.save()
-                alert_success = 'Record updated successfully'
-            except:
-                alert_danger = 'Record already exist for this '
-                print "record already exist!"
-            return HttpResponseRedirect("/portal")
-
-
-        context = {
-            'form': form,
-            'appDetails': appDetails,
-            'alert_success': alert_success,
-            'alert_danger': alert_danger
-        }
-        return render(request, 'portal/templates/extension.html', context)
+            institution = InstitutionDetail.objects.filter(institution_name = form.cleaned_data['institution_name'], state = form.cleaned_data['state'], district = form.cleaned_data['district'], location = form.cleaned_data['location'],  city = form.cleaned_data['city'], institution_type = form.cleaned_data['institution_type'], unaided_courses = form.cleaned_data['unaided_courses'], women_institute = form.cleaned_data['women_institute'], co_ed = form.cleaned_data['co_ed']).last()
+            save_flag = 0
+            if institution or is_edit == 1:
+                institution = InstitutionDetail.objects.get(pk = application_year.institution_id)
+                form = InstitutionDetailForm(request.POST, instance = institution)
+                if form.is_valid():
+                    save_flag = 1
+            else:
+                save_flag = 1
+            if save_flag:
+                institution = form.save()
+                application_year.institution_id = institution.id
+                application_year.save()
     else:
+        form = InstitutionDetailForm()
         if is_edit:
-            form = InstitutionDetailForm(instance = academic_year.application_detail.institution)
-        else:
-            form = InstitutionDetailForm()
-        context = {
-            'form': form,
-            'appDetails': appDetails,
-            'alert_success': '',
-            'alert_danger': alert_danger
-        }
-        return render(request, 'portal/templates/extension.html', context)
+            form = InstitutionDetailForm(instance = application_year.institution)
+    context = {
+        'form': form,
+        'appDetails': appDetails,
+        'alert_success': alert_success,
+        'alert_danger': alert_danger
+    }
+    return render(request, 'portal/templates/extension.html', context)
+
+@login_required
+def organisation(request):
+    base_data = application_base(request, 'organisation_id')
+    application_year = base_data[0]
+    is_edit = base_data[1]
+    appDetails = base_data[2]
+    alert_success = ''
+    alert_danger = ''
+
+    if request.method == 'POST':
+        form = OrganisationForm(request.POST)
+        if form.is_valid():
+            organisation = Organisation.objects.filter(name = form.cleaned_data['name'], organisation_type = form.cleaned_data['organisation_type'], state = form.cleaned_data['state'], district = form.cleaned_data['district'], location = form.cleaned_data['location'], city = form.cleaned_data['city']).last()
+            save_flag = 0
+            if organisation or is_edit == 1:
+                organisation = Organisation.objects.get(pk = application_year.organisation_id)
+                form = OrganisationForm(request.POST, instance = organisation)
+                if form.is_valid():
+                    save_flag = 1
+            else:
+                save_flag = 1
+            if save_flag:
+                organisation = form.save()
+                application_year.organisation_id = organisation.id
+                application_year.save()
+    else:
+        form = OrganisationForm()
+        if is_edit:
+            form = OrganisationForm(instance = application_year.organisation)
+    context = {
+        'form': form,
+        'appDetails': appDetails,
+        'alert_success': alert_success,
+        'alert_danger': alert_danger
+    }
+    return render(request, 'portal/templates/organisation.html', context)
+
 
 #Ajax Request and Responces
 @csrf_exempt
