@@ -1,0 +1,122 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Per Land Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {{ form }}
+                        <!--{% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name">Organisation Name</label>
+                                    {{ form.name.errors }}
+                                    {% render_field form.name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="organisation_type">Organisation Type</label>
+                                    {{ form.organisation_type.errors }}
+                                    {% render_field form.organisation_type class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_with">Registered With</label>
+                                    {{ form.registered_with.errors }}
+                                    {% render_field form.registered_with class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_date">Registered Date</label>
+                                    {{ form.registered_date.errors }}
+                                    {% render_field form.registered_date class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="registered_number">Registered Number</label>
+                                    {{ form.registered_number.errors }}
+                                    {% render_field form.registered_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    {{ form.address.errors }}
+                                    {% render_field form.address class+='form-control' %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    {{ form.state.errors }}
+                                    {% render_field form.state class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="district">District</label>
+                                    {{ form.district.errors }}
+                                    {% render_field form.district class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    {{ form.location.errors }}
+                                    {% render_field form.location class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    {{ form.city.errors }}
+                                    {% render_field form.city class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="std_code">STD Code</label>
+                                    {{ form.std_code.errors }}
+                                    {% render_field form.std_code class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_phone">Land Phone</label>
+                                    {{ form.land_phone.errors }}
+                                    {% render_field form.land_phone class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="cell_phone">Cell Phone</label>
+                                    {{ form.cell_phone.errors }}
+                                    {% render_field form.cell_phone class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="fax_number">Fax Number</label>
+                                    {{ form.fax_number.errors }}
+                                    {% render_field form.fax_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    {{ form.website.errors }}
+                                    {% render_field form.website class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        <!--</div> <!-- /.row  -->
+                        <!--{% endwith %} -->
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

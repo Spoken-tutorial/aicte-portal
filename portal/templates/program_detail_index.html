@@ -1,0 +1,56 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Programme Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newprogram_detail' application_year %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Programme</th>
+                                <th>Application Year</th>
+                                <th>New/Existing Programme</th>
+                                <th>Instructional Area Housing/Building Details</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for program in program_details %}
+                                <tr>
+                                    <td>{{ program.program }}</td>
+                                    <td>{{ program.application_year.academic_year }}</td>
+                                    <td>{% if program.new_existing %}Existing{% else %}New{% endif %} Programme</td>
+                                    <td>{{ program.instructional_area.building_name }}</td>
+                                    <td><a href="{% url 'portal:editprogram_detail' program.application_year_id program.id %}">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Course Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="program_detail">Program</label>
+                                    {{ form.program.errors }}
+                                    {% render_field form.program class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="affiliating_board">affiliating_board</label>
+                                    {{ form.affiliating_board.errors }}
+                                    {% render_field form.affiliating_board class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="level_of_course">level_of_course</label>
+                                    {{ form.level_of_course.errors }}
+                                    {% render_field form.level_of_course class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">department</label>
+                                    {{ form.department.errors }}
+                                    {% render_field form.department class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="course">course</label>
+                                    {{ form.course.errors }}
+                                    {% render_field form.course class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="shift">shift</label>
+                                    {{ form.shift.errors }}
+                                    {% render_field form.shift class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_approved_intake">last_approved_intake</label>
+                                    {{ form.last_approved_intake.errors }}
+                                    {% render_field form.last_approved_intake class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="intake_applied_for">intake_applied_for</label>
+                                    {{ form.intake_applied_for.errors }}
+                                    {% render_field form.intake_applied_for class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="course_duration">course_duration</label>
+                                    {{ form.course_duration.errors }}
+                                    {% render_field form.course_duration class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="year_started">year_started</label>
+                                    {{ form.year_started.errors }}
+                                    {% render_field form.year_started class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="full_part_time">full_part_time</label>
+                                    {{ form.full_part_time.errors }}
+                                    {% render_field form.full_part_time class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accreditation_status">accreditation_status</label>
+                                    {{ form.accreditation_status.errors }}
+                                    {% render_field form.accreditation_status class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accreditation_type">accreditation_type</label>
+                                    {{ form.accreditation_type.errors }}
+                                    {% render_field form.accreditation_type class+='form-control' %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accreditation_from">accreditation_from</label>
+                                    {{ form.accreditation_from.errors }}
+                                    {% render_field form.accreditation_from class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accreditation_till">accreditation_till</label>
+                                    {{ form.accreditation_till.errors }}
+                                    {% render_field form.accreditation_till class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accreditation_letter_date">accreditation_letter_date</label>
+                                    {{ form.accreditation_letter_date.errors }}
+                                    {% render_field form.accreditation_letter_date class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accreditation_letter_refno">accreditation_letter_refno</label>
+                                    {{ form.accreditation_letter_refno.errors }}
+                                    {% render_field form.accreditation_letter_refno class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="nri">nri</label>
+                                    {{ form.nri.errors }}
+                                    {% render_field form.nri class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pio">pio</label>
+                                    {{ form.pio.errors }}
+                                    {% render_field form.pio class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="annual_fees">annual_fees</label>
+                                    {{ form.annual_fees.errors }}
+                                    {% render_field form.annual_fees class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="no_of_faculty">no_of_faculty</label>
+                                    {{ form.no_of_faculty.errors }}
+                                    {% render_field form.no_of_faculty class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="govt_recommendation">govt_recommendation</label>
+                                    {{ form.govt_recommendation.errors }}
+                                    {% render_field form.govt_recommendation class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="board_recommendation">board_recommendation</label>
+                                    {{ form.board_recommendation.errors }}
+                                    {% render_field form.board_recommendation class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="course_type">course_type</label>
+                                    {{ form.course_type.errors }}
+                                    {% render_field form.course_type class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="mode_of_conduct">mode_of_conduct</label>
+                                    {{ form.mode_of_conduct.errors }}
+                                    {% render_field form.mode_of_conduct class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Course is Available?</label>
+                                    {{ form.status.errors }}
+                                    {% render_field form.status class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

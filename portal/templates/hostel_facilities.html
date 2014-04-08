@@ -1,0 +1,174 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="accomodation_b1">accomodation_b1</label>
+                                    {{ form.accomodation_b1.errors }}
+                                    {% render_field form.accomodation_b1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_b1">room_area_in_sqm_b1</label>
+                                    {{ form.room_area_in_sqm_b1.errors }}
+                                    {% render_field form.room_area_in_sqm_b1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_b1">per_building_detail_b1</label>
+                                    {{ form.per_building_detail_b1.errors }}
+                                    {% render_field form.per_building_detail_b1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_b2">accomodation_b2</label>
+                                    {{ form.accomodation_b2.errors }}
+                                    {% render_field form.accomodation_b2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_b2">room_area_in_sqm_b2</label>
+                                    {{ form.room_area_in_sqm_b2.errors }}
+                                    {% render_field form.room_area_in_sqm_b2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_b2">per_building_detail_b2</label>
+                                    {{ form.per_building_detail_b2.errors }}
+                                    {% render_field form.per_building_detail_b2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_b3">accomodation_b3</label>
+                                    {{ form.accomodation_b3.errors }}
+                                    {% render_field form.accomodation_b3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_b3">room_area_in_sqm_b3</label>
+                                    {{ form.room_area_in_sqm_b3.errors }}
+                                    {% render_field form.room_area_in_sqm_b3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_b3">per_building_detail_b3</label>
+                                    {{ form.per_building_detail_b3.errors }}
+                                    {% render_field form.per_building_detail_b3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_b4">accomodation_b4</label>
+                                    {{ form.accomodation_b4.errors }}
+                                    {% render_field form.accomodation_b4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_b4">room_area_in_sqm_b4</label>
+                                    {{ form.room_area_in_sqm_b4.errors }}
+                                    {% render_field form.room_area_in_sqm_b4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_b4">per_building_detail_b4</label>
+                                    {{ form.per_building_detail_b4.errors }}
+                                    {% render_field form.per_building_detail_b4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_g1">accomodation_g1</label>
+                                    {{ form.accomodation_g1.errors }}
+                                    {% render_field form.accomodation_g1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_g1">room_area_in_sqm_g1</label>
+                                    {{ form.room_area_in_sqm_g1.errors }}
+                                    {% render_field form.room_area_in_sqm_g1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_g1">per_building_detail_g1</label>
+                                    {{ form.per_building_detail_g1.errors }}
+                                    {% render_field form.per_building_detail_g1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_g2">accomodation_g2</label>
+                                    {{ form.accomodation_g2.errors }}
+                                    {% render_field form.accomodation_g2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_g2">room_area_in_sqm_g2</label>
+                                    {{ form.room_area_in_sqm_g2.errors }}
+                                    {% render_field form.room_area_in_sqm_g2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_g2">per_building_detail_g2</label>
+                                    {{ form.per_building_detail_g2.errors }}
+                                    {% render_field form.per_building_detail_g2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_g3">accomodation_g3</label>
+                                    {{ form.accomodation_g3.errors }}
+                                    {% render_field form.accomodation_g3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_g3">room_area_in_sqm_g3</label>
+                                    {{ form.room_area_in_sqm_g3.errors }}
+                                    {% render_field form.room_area_in_sqm_g3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_g3">per_building_detail_g3</label>
+                                    {{ form.per_building_detail_g3.errors }}
+                                    {% render_field form.per_building_detail_g3 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="accomodation_g4">accomodation_g4</label>
+                                    {{ form.accomodation_g4.errors }}
+                                    {% render_field form.accomodation_g4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_area_in_sqm_g4">room_area_in_sqm_g4</label>
+                                    {{ form.room_area_in_sqm_g4.errors }}
+                                    {% render_field form.room_area_in_sqm_g4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail_g4">per_building_detail_g4</label>
+                                    {{ form.per_building_detail_g4.errors }}
+                                    {% render_field form.per_building_detail_g4 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="backup_electric">backup_electric</label>
+                                    {{ form.backup_electric.errors }}
+                                    {% render_field form.backup_electric class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="electric_supply">electric_supply</label>
+                                    {{ form.electric_supply.errors }}
+                                    {% render_field form.electric_supply class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

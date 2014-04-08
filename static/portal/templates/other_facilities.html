@@ -1,0 +1,187 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Building Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="potable_water_supply">potable_water_supply</label>
+                                    {{ form.potable_water_supply.errors }}
+                                    {% render_field form.potable_water_supply class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="electric_supply">electric_supply</label>
+                                    {{ form.electric_supply.errors }}
+                                    {% render_field form.electric_supply class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    {{ form.website.errors }}
+                                    {% render_field form.website class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="notice_board">notice_board</label>
+                                    {{ form.notice_board.errors }}
+                                    {% render_field form.notice_board class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="post_banking">post_banking</label>
+                                    {{ form.post_banking.errors }}
+                                    {% render_field form.post_banking class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="staff_quarters">staff_quarters</label>
+                                    {{ form.staff_quarters.errors }}
+                                    {% render_field form.staff_quarters class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="backup_electric">backup_electric</label>
+                                    {{ form.backup_electric.errors }}
+                                    {% render_field form.backup_electric class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="general_insurance">general_insurance</label>
+                                    {{ form.general_insurance.errors }}
+                                    {% render_field form.general_insurance class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="student_insurance">student_insurance</label>
+                                    {{ form.student_insurance.errors }}
+                                    {% render_field form.student_insurance class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="public_announcement">public_announcement</label>
+                                    {{ form.public_announcement.errors }}
+                                    {% render_field form.public_announcement class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="projector_in_class">projector_in_class</label>
+                                    {{ form.projector_in_class.errors }}
+                                    {% render_field form.projector_in_class class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone_fax">telephone_fax</label>
+                                    {{ form.telephone_fax.errors }}
+                                    {% render_field form.telephone_fax class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="barrier_fee">barrier_fee</label>
+                                    {{ form.barrier_fee.errors }}
+                                    {% render_field form.barrier_fee class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="all_weather_approach">all_weather_approach</label>
+                                    {{ form.all_weather_approach.errors }}
+                                    {% render_field form.all_weather_approach class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="group_insurance">group_insurance</label>
+                                    {{ form.group_insurance.errors }}
+                                    {% render_field form.group_insurance class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="medical_counseling">medical_counseling</label>
+                                    {{ form.medical_counseling.errors }}
+                                    {% render_field form.medical_counseling class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="safety_provision">safety_provision</label>
+                                    {{ form.safety_provision.errors }}
+                                    {% render_field form.safety_provision class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="transport_facility">transport_facility</label>
+                                    {{ form.transport_facility.errors }}
+                                    {% render_field form.transport_facility class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="cctv_security">cctv_security</label>
+                                    {{ form.cctv_security.errors }}
+                                    {% render_field form.cctv_security class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="erp_software">erp_software</label>
+                                    {{ form.erp_software.errors }}
+                                    {% render_field form.erp_software class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="first_aid">first_aid</label>
+                                    {{ form.first_aid.errors }}
+                                    {% render_field form.first_aid class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="sewage_disposal">sewage_disposal</label>
+                                    {{ form.sewage_disposal.errors }}
+                                    {% render_field form.sewage_disposal class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="vehicle_parking">vehicle_parking</label>
+                                    {{ form.vehicle_parking.errors }}
+                                    {% render_field form.vehicle_parking class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="language_lab">language_lab</label>
+                                    {{ form.language_lab.errors }}
+                                    {% render_field form.language_lab class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:perbuilding' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with perbuildings=user|get_perbuilding %}
+                                    <tr>
+                                        <th>Building Name</th>
+                                        <th>BUilding Name</th>
+                                        <th>Building Area</th>
+                                        <th>Action</th>
+                                    </tr>
+                                {% for perbuilding in perbuildings %}
+                                    <tr>
+                                        <td>{{ perbuilding.building_name }}</td>
+                                        <td>{{ perbuilding.building_number }}</td>
+                                        <td>{{ perbuilding.sanct_build_area }}</td>
+                                        <td><a href="{% url 'portal:editperbuilding' perbuilding.building_detail_id perbuilding.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

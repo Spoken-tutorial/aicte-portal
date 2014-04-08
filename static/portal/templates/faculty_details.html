@@ -1,0 +1,144 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Faculty Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {{ form.errors }}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="title">title</label>
+                                    {{ form.title.errors }}
+                                    {% render_field form.title class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="first_name">first_name</label>
+                                    {{ form.first_name.errors }}
+                                    {% render_field form.first_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="middel_name">middel_name</label>
+                                    {{ form.middel_name.errors }}
+                                    {% render_field form.middel_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">last_name</label>
+                                    {{ form.last_name.errors }}
+                                    {% render_field form.last_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">gender</label>
+                                    {{ form.gender.errors }}
+                                    {% render_field form.gender class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="father_name">father_name</label>
+                                    {{ form.father_name.errors }}
+                                    {% render_field form.father_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="mother_name">mother_name</label>
+                                    {{ form.mother_name.errors }}
+                                    {% render_field form.mother_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_birth">date_of_birth</label>
+                                    {{ form.date_of_birth.errors }}
+                                    {% render_field form.date_of_birth class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="current_age">current_age</label>
+                                    {{ form.current_age.errors }}
+                                    {% render_field form.current_age class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="address1">address1</label>
+                                    {{ form.address1.errors }}
+                                    {% render_field form.address1 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">address2</label>
+                                    {{ form.address2.errors }}
+                                    {% render_field form.address2 class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">state</label>
+                                    {{ form.state.errors }}
+                                    {% render_field form.state class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="district">district</label>
+                                    {{ form.district.errors }}
+                                    {% render_field form.district class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">location</label>
+                                    {{ form.location.errors }}
+                                    {% render_field form.location class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">city</label>
+                                    {{ form.city.errors }}
+                                    {% render_field form.city class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="caste">caste</label>
+                                    {{ form.caste.errors }}
+                                    {% render_field form.caste class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="left_institute">left_institute</label>
+                                    {{ form.left_institute.errors }}
+                                    {% render_field form.left_institute class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="relieved_date">relieved_date</label>
+                                    {{ form.relieved_date.errors }}
+                                    {% render_field form.relieved_date class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pan_number">pan_number</label>
+                                    {{ form.pan_number.errors }}
+                                    {% render_field form.pan_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="std_code">std_code</label>
+                                    {{ form.std_code.errors }}
+                                    {% render_field form.std_code class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

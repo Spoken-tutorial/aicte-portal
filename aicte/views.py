@@ -3,7 +3,10 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 
-from aicte.forms import UserLoginForm
+from aicte.forms import UserLoginForm, UserRegisterForm
+
+def home(request):
+    return HttpResponseRedirect('/portal/extension')
 
 def user_login(request):
     if request.user.is_anonymous():
@@ -32,3 +35,24 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/portal/extension')
+
+def user_register(request):
+    context = {}
+    if request.user.is_anonymous():
+        if request.method == 'POST':
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/portal')
+            else:
+                context.update(csrf(request))
+                context['form'] = form
+                return render_to_response('aicte/templates/user_register.html', context)
+        else:
+            form = UserRegisterForm()
+        context.update(csrf(request))
+        context['form'] = form
+        return render_to_response('aicte/templates/user_register.html', context)
+    else:
+        return HttpResponseRedirect('/portal')
+    

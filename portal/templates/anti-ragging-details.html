@@ -1,0 +1,79 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="committee">Committee</label>
+                                    {{ form.committee.errors }}
+                                    {% render_field form.committee class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="squad">Squad</label>
+                                    {{ form.squad.errors }}
+                                    {% render_field form.squad class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="affidavit_from_student">Affidavit from Student</label>
+                                    {{ form.affidavit_from_student.errors }}
+                                    {% render_field form.affidavit_from_student class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="appointment_of_counselor">Appointment of Counselor</label>
+                                    {{ form.appointment_of_counselor.errors }}
+                                    {% render_field form.appointment_of_counselor class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="affidavit_from_parent">Affidavit from Parent</label>
+                                    {{ form.affidavit_from_parent.errors }}
+                                    {% render_field form.affidavit_from_parent class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="affidavit_from_student_hostel">Affidavit from Student Hostel</label>
+                                    {{ form.affidavit_from_student_hostel.errors }}
+                                    {% render_field form.affidavit_from_student_hostel class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="affidavit_from_parent_hostel">Affidavit from Parent Hostel</label>
+                                    {{ form.affidavit_from_parent_hostel.errors }}
+                                    {% render_field form.affidavit_from_parent_hostel class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

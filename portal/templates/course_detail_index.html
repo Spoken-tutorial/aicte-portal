@@ -1,0 +1,58 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Course Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newcourse_detail' application %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Program</th>
+                                <th>Affiliating Board</th>
+                                <th>Year Started</th>
+                                <th>Level</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for course in course_details %}
+                                <tr>
+                                    <td>{{ course.course }}</td>
+                                    <td>{{ course.affiliating_board }}</td>
+                                    <td>{{ course.year_started }}</td>
+                                    <td>{{ course.full_part_time }}</td>
+                                    <td>{% if course.status %} Available {% else %} Not Available {% endif %}</td>
+                                    <td><a href="{% url 'portal:editcourse_detail' course.application_id course.id %}">Edit</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

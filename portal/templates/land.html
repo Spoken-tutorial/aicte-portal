@@ -1,0 +1,188 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Land Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="location">Location</label>
+                                    {{ form.location.errors }}
+                                    {% render_field form.location class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="total_area_acres">Total Area in Acres</label>
+                                    {{ form.total_area_acres.errors }}
+                                    {% render_field form.total_area_acres class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_reg_with">Land Registered with</label>
+                                    {{ form.land_reg_with.errors }}
+                                    {% render_field form.land_reg_with class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_reg">Date of Registration</label>
+                                    {{ form.date_of_reg.errors }}
+                                    {% render_field form.date_of_reg class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="north_hilly_area">Land in North Hilly Area</label>
+                                    {{ form.north_hilly_area.errors }}
+                                    {% render_field form.north_hilly_area class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="no_of_pieces">Number of Pieces</label>
+                                    {{ form.no_of_pieces.errors }}
+                                    {% render_field form.no_of_pieces class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="max_distance">Maximum Distance</label>
+                                    {{ form.max_distance.errors }}
+                                    {% render_field form.max_distance class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_cert_issued_by">Land use certificate issued By</label>
+                                    {{ form.land_cert_issued_by.errors }}
+                                    {% render_field form.land_cert_issued_by class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_cert_issued_date">Land use certificate issued Date</label>
+                                    {{ form.land_cert_issued_date.errors }}
+                                    {% render_field form.land_cert_issued_date class+='form-control date' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="ownership_details">Ownership details</label>
+                                    {{ form.ownership_details.errors }}
+                                    {% render_field form.ownership_details class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_mordgaged">is the Land Mordgaged</label>
+                                    {{ form.land_mordgaged.errors }}
+                                    {% render_field form.land_mordgaged class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="latitude_ns">Latitude(North/South)</label>
+                                    {{ form.latitude_ns.errors }}
+                                    {% render_field form.latitude_ns class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="latitude_degree">Latitude Degree</label>
+                                    {{ form.latitude_degree.errors }}
+                                    {% render_field form.latitude_degree class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="latitude_minute">Latitude Minute</label>
+                                    {{ form.latitude_minute.errors }}
+                                    {% render_field form.latitude_minute class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="latitude_second">Latitude Second</label>
+                                    {{ form.latitude_second.errors }}
+                                    {% render_field form.latitude_second class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="longitude_ew">Longitude(East/West)</label>
+                                    {{ form.longitude_ew.errors }}
+                                    {% render_field form.longitude_ew class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="longitude_degree">Longitude Degree</label>
+                                    {{ form.longitude_degree.errors }}
+                                    {% render_field form.longitude_degree class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="longitude_minute">Longitude Minute</label>
+                                    {{ form.longitude_minute.errors }}
+                                    {% render_field form.longitude_minute class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="longitude_second">Longitude Second</label>
+                                    {{ form.longitude_second.errors }}
+                                    {% render_field form.longitude_second class+='form-control' %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:perland' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with perlands=user|get_perland %}
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Action</th>
+                                        <th>Land Registration No</th>
+                                        <th>Date of Registration</th>
+                                        <th>Area of Land</th>
+                                        <th>Khasra Number</th>
+                                        <th>Plot/Survey Number</th>
+                                        <th>Land Situated At</th>
+                                        <th>Land Registered in the Name of</th>
+                                        <th>Ownership or Government Lease</th>
+                                        <th>Land Use Certificate Issued</th>
+                                        <th>Name of Land Use Certificate Issuing Authority</th>
+                                        <th>Is this Land Mortgaged</th>
+                                        <th>Details of Bank if Land is Mortgaged</th>
+                                        <th>Land Required at the Time of First Approval (In Acres)</th>
+                                        <th>Land Avalilable at the Time of First Approval (In Acres)</th>
+                                    </tr>
+                                {% for perland in perlands %}
+                                    <tr>
+                                        <td>{{forloop.counter}}
+                                        <td><a href="{% url 'portal:editperland' perland.land_detail_id perland.id %}">Edit</a></td>
+                                        <td>{{ perland.land_reg_no }}</td>
+                                        <td>{{ perland.date_of_reg }}</td>
+                                        <td>{{ perland.area_of_land }}</td>
+                                        <td>{{ perland.khasra_number }}</td>
+                                        <td>{{ perland.plot_survey_no }}</td>
+                                        <td>{{ perland.land_situated }}</td>
+                                        <td>{{ perland.land_reg_name }}</td>
+                                        <td>{{ perland.owner_govt_lease }}</td>
+                                        <td>{{ perland.land_cert_issued }}</td>
+                                        <td>{{ perland.land_cert_authority }}</td>
+                                        <td>{{ perland.is_mortgaged }}</td>
+                                        <td>{{ perland.bank_mortgaged }}</td>
+                                        <td>{{ perland.land_required }}</td>
+                                        <td>{{ perland.land_available }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

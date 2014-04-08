@@ -1,0 +1,57 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Programme Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {{ form.errors }}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="program">Programme</label>
+                                    {{ form.relieved_date.errors }}
+                                    {% render_field form.program class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="new_existing">New/Existing Programme</label>
+                                    {{ form.new_existing.errors }}
+                                    {% render_field form.new_existing class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructional_area">Instructional Area Housing/Building Details</label>
+                                    {{ form.instructional_area.errors }}
+                                    {% render_field form.instructional_area class+='form-control' %}
+                                </div>
+                                <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

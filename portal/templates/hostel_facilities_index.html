@@ -1,0 +1,102 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newhostel_facilities' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if hostel_facilities %}
+                            <table class="table">
+                                <tr>
+                                    <th> accomodation_b1 </th>
+                                    <th> room_area_in_sqm_b1 </th>
+                                    <th> per_building_detail_b1 </th>
+                                    <th> accomodation_b2 </th>
+                                    <th> room_area_in_sqm_b2 </th>
+                                    <th> per_building_detail_b2 </th>
+                                    <th> accomodation_b3 </th>
+                                    <th> room_area_in_sqm_b3 </th>
+                                    <th> per_building_detail_b3 </th>
+                                    <th> accomodation_b4 </th>
+                                    <th> room_area_in_sqm_b4 </th>
+                                    <th> per_building_detail_b4 </th>
+                                    <th> accomodation_g1 </th>
+                                    <th> room_area_in_sqm_g1 </th>
+                                    <th> per_building_detail_g1 </th>
+                                    <th> accomodation_g2 </th>
+                                    <th> room_area_in_sqm_g2 </th>
+                                    <th> per_building_detail_g2 </th>
+                                    <th> accomodation_g3 </th>
+                                    <th> room_area_in_sqm_g3 </th>
+                                    <th> per_building_detail_g3 </th>
+                                    <th> accomodation_g4 </th>
+                                    <th> room_area_in_sqm_g4 </th>
+                                    <th> per_building_detail_g4 </th>
+                                    <th> backup_electric </th>
+                                    <th> electric_supply </th>
+                                </tr>
+                                {% for hostel_facility in hostel_facilities %}
+                                    <tr>
+                                        <td> {{ hostel_facility.accomodation_b1 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_b1 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_b1 }} </td>
+                                        <td> {{ hostel_facility.accomodation_b2 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_b2 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_b2 }} </td>
+                                        <td> {{ hostel_facility.accomodation_b3 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_b3 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_b3 }} </td>
+                                        <td> {{ hostel_facility.accomodation_b4 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_b4 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_b4 }} </td>
+                                        <td> {{ hostel_facility.accomodation_g1 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_g1 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_g1 }} </td>
+                                        <td> {{ hostel_facility.accomodation_g2 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_g2 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_g2 }} </td>
+                                        <td> {{ hostel_facility.accomodation_g3 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_g3 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_g3 }} </td>
+                                        <td> {{ hostel_facility.accomodation_g4 }} </td>
+                                        <td> {{ hostel_facility.room_area_in_sqm_g4 }} </td>
+                                        <td> {{ hostel_facility.per_building_detail_g4 }} </td>
+                                        <td> {{ hostel_facility.backup_electric }} </td>
+                                        <td> {{ hostel_facility.electric_supply }} </td>
+                                        <td><a href="{% url 'portal:edithostel_facilities' hostel_facility.application_id hostel_facility.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

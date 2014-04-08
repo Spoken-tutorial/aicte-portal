@@ -1,0 +1,60 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newlibrary_book' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if library_books %}
+                            <table class="table">
+                                <tr>
+                                    <th>Titles</th>
+                                    <th>Volumes</th>
+                                    <th>National Journals</th>
+                                    <th>International Journals</th>
+                                    <th>Ejournals</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for library_book in library_books %}
+                                    <tr>
+                                        <td>{{ library_book.no_of_titles }}</td>
+                                        <td>{{ library_book.no_of_volumes }}</td>
+                                        <td>{{ library_book.no_of_national_journals }}</td>
+                                        <td>{{ library_book.no_of_international_journals }}</td>
+                                        <td>{% if library_book.ejournals %} Yes {% else %} No {% endif %}</td>
+                                        <td><a href="{% url 'portal:editlibrary_book' library_book.application_id library_book.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

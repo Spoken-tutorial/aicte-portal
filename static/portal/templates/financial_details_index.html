@@ -1,0 +1,66 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Financial Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newfinancial_details' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if financial_details %}
+                            <table class="table">
+                                <tr>
+                                    <th>Central</th>
+                                    <th>State</th>
+                                    <th>Student</th>
+                                    <th>donation</th>
+                                    <th>UGC</th>
+                                    <th>Other Bodies</th>
+                                    <th>Revenue</th>
+                                    <th>Total Income</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for financial_detail in financial_details %}
+                                    <tr>
+                                        <td>{{ financial_detail.income_central }}</td>
+                                        <td>{{ financial_detail.income_state }}</td>
+                                        <td>{{ financial_detail.income_student }}</td>
+                                        <td>{{ financial_detail.income_donation }}</td>
+                                        <td>{{ financial_detail.income_ugc }}</td>
+                                        <td>{{ financial_detail.income_other_bodies }}</td>
+                                        <td>{{ financial_detail.income_revenue }}</td>
+                                        <td>{{ financial_detail.total_income }}</td>
+                                        <td><a href="{% url 'portal:editfinancial_details' financial_detail.application_id financial_detail.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

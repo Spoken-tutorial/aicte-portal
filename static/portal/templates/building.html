@@ -1,0 +1,144 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Building Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="building_status">Building Status</label>
+                                    {{ form.building_status.errors }}
+                                    {% render_field form.building_status class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="built_area_planned">Total Built up Area (sqm) Planned</label>
+                                    {{ form.built_area_planned.errors }}
+                                    {% render_field form.built_area_planned class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="built_area_ready">Total Built up Area (sqm) Ready</label>
+                                    {{ form.built_area_ready.errors }}
+                                    {% render_field form.built_area_ready class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="carpet_area_instructional">Total Carpet Area (sqm) - Instructional Ready</label>
+                                    {{ form.carpet_area_instructional.errors }}
+                                    {% render_field form.carpet_area_instructional class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="carpet_area_admin">Total Carpet Area (sqm) - Administrative Ready</label>
+                                    {{ form.carpet_area_admin.errors }}
+                                    {% render_field form.carpet_area_admin class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="carpet_area_amenities">Total Carpet Area (sqm) - Amenities Ready</label>
+                                    {{ form.carpet_area_amenities.errors }}
+                                    {% render_field form.carpet_area_amenities class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="funds_allocated">Funds Allocated</label>
+                                    {{ form.funds_allocated.errors }}
+                                    {% render_field form.funds_allocated class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="loans">Loans</label>
+                                    {{ form.loans.errors }}
+                                    {% render_field form.loans class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="own_share">Own Share</label>
+                                    {{ form.own_share.errors }}
+                                    {% render_field form.own_share class+='form-control' %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:perbuilding' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with perbuildings=user|get_perbuilding %}
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Action</th>
+                                        <th>Building Name</th>
+                                        <th>BUilding Number</th>
+                                        <th>Sanctioned Build Up Area</th>
+                                        <th>Constructed Build Up Area</th>
+                                        <th>Approved Carpet Area - Instructional</th>
+                                        <th>Constructed Carpet Area - Instructional</th>
+                                        <th>Approved Carpet Area - Administrative</th>
+                                        <th>Constructed Carpet Area - Administrative</th>
+                                        <th>Approved Carpet Area - Amenities</th>
+                                        <th>Constructed Carpet Area - Amenities</th>
+                                        <th>Total Area Approved</th>
+                                        <th>Total Area Constructed</th>
+                                        <th>Activities Constructed in the Building</th>
+                                        <th>Non AICTE approved courses run in the building</th>
+                                        <th>Name of the Building plan Approving Authority</th>
+                                        <th>Building plan Approval Date</th>
+                                        <th>Approval Number</th>
+                                    </tr>
+                                {% for perbuilding in perbuildings %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a href="{% url 'portal:editperbuilding' perbuilding.building_detail_id perbuilding.id %}">Edit</a></td>
+                                        <td>{{ perbuilding.building_name }}</td>
+                                        <td>{{ perbuilding.building_number }}</td>
+                                        <td>{{ perbuilding.sanct_build_area }}</td>
+                                        <td>{{ perbuilding.const_build_area }}</td>
+                                        <td>{{ perbuilding.approved_carpet_area_inst }}</td>
+                                        <td>{{ perbuilding.const_carpet_area_inst }}</td>
+                                        <td>{{ perbuilding.approved_carpet_area_admin }}</td>
+                                        <td>{{ perbuilding.const_carpet_area_admin }}</td>
+                                        <td>{{ perbuilding.approved_carpet_area_amen }}</td>
+                                        <td>{{ perbuilding.const_carpet_area_amen }}</td>
+                                        <td>{{ perbuilding.total_area_approved }}</td>
+                                        <td>{{ perbuilding.total_area_constructed }}</td>
+                                        <td>{{ perbuilding.activities_conducted }}</td>
+                                        <td>{{ perbuilding.non_aicte_courses }}</td>
+                                        <td>{{ perbuilding.approving_authority }}</td>
+                                        <td>{{ perbuilding.approval_date }}</td>
+                                        <td>{{ perbuilding.approval_number }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

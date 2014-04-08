@@ -1,0 +1,56 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Amenities Areas</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newamenities_area' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if amenities_areas %}
+                            <table class="table">
+                                <tr>
+                                    <th>Building Name</th>
+                                    <th>Room type</th>
+                                    <th>Room Name</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for amenities_area in amenities_areas %}
+                                    <tr>
+                                        <td>{{ amenities_area.per_building_detail }}</td>
+                                        <td>{{ amenities_area.room_type }}</td>
+                                        <td>{{ amenities_area.room_id_name }}</td>
+                                        <td><a href="{% url 'portal:editamenities_area' amenities_area.application_id amenities_area.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newcirculation_areas' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if fee_structures %}
+                            <table class="table">
+                                <tr>
+                                    <th> program </th>
+                                    <th> course </th>
+                                    <th> level </th>
+                                    <th> admission_quota </th>
+                                    <th> tuition_fee </th>
+                                    <th> other_fee </th>
+                                    <th> total_fee </th>
+                                    <th> approving_body </th>
+                                    <th> approval_date </th>
+                                </tr>
+                                {% for fee_structure in fee_structures %}
+                                    <tr>
+                                        <td> {{ fee_structure.program }} </td>
+                                        <td> {{ fee_structure.course }} </td>
+                                        <td> {{ fee_structure.level }} </td>
+                                        <td> {{ fee_structure.admission_quota }} </td>
+                                        <td> {{ fee_structure.tuition_fee }} </td>
+                                        <td> {{ fee_structure.other_fee }} </td>
+                                        <td> {{ fee_structure.total_fee }} </td>
+                                        <td> {{ fee_structure.approving_body }} </td>
+                                        <td> {{ fee_structure.approval_date }} </td>
+                                        <td><a href="{% url 'portal:editcirculation_areas' circulation_area.application_id circulation_area.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

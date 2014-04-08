@@ -1,0 +1,62 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Technical Staffs</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newtechnical_staffs' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if technical_staffs %}
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Appointment Type</th>
+                                    <th>D.O.J</th>
+                                    <th>Position</th>
+                                    <th>Gross pay Month</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for technical_staff in technical_staffs %}
+                                    <tr>
+                                        <td>{{ technical_staff.title }} {{ technical_staff.first_name }} {{ technical_staff.middle_name }} {{ technical_staff.last_name }}</td>
+                                            <td>{{ technical_staff.designation }}</td>
+                                            <td>{{ technical_staff.appointment_type }}</td>
+                                            <td>{{ technical_staff.date_of_join }}</td>
+                                            <td>{{ technical_staff.position }}</td>
+                                            <td>{{ technical_staff.gross_pay_month }}</td>
+                                        <td><a href="{% url 'portal:edittechnical_staffs' technical_staff.application_id technical_staff.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% load active %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Quick Links</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item {% active request '/portal/extension' %}" href="/portal/extension/"><small>Institution Details</small></a>
+                            <a class="list-group-item {% active request '/portal/organisation' %}" href="/portal/organisation/"><small>Organisation Details</small></a>
+                            <a class="list-group-item {% active request '/portal/contact-details' %}" href="/portal/contact-details/"><small>Contact Details</small></a>
+                            <a class="list-group-item {% active request '/portal/land-details' %}" href="/portal/land-details/"><small>Land Details</small></a>
+                            <a class="list-group-item {% active request '/portal/building-details' %}" href="/portal/building-details/"><small>Building Details</small></a>
+                            <a class="list-group-item" href=""><small>View Upload by RO</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item {% active request '/portal/program-details/' %}" href="/portal/program-details/"><small>Program Details</small></a>
+                            <a class="list-group-item {% active request '/portal/course-details/' %}" href="/portal/course-details/"><small>course Details</small></a>
+                            <a class="list-group-item {% active request '/portal/faculty-details/' %}" href="/portal/faculty-details/"><small>Faculty Details</small></a>
+                            <a class="list-group-item {% active request '/portal/instructional-area/' %}" href="/portal/instructional-area/"><small>Instructional Area</small></a>
+                            <a class="list-group-item {% active request '/portal/common-facility/' %}" href="/portal/common-facility/"><small>Inst.Area-Comm Fac.</small></a>
+                            <a class="list-group-item {% active request '/portal/administrative-area/' %}" href="/portal/administrative-area/"><small>Administrative Area</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item {% active request '/portal/amenities-area/' %}" href="/portal/amenities-area/"><small>Amenties Area</small></a>
+                            <a class="list-group-item {% active request '/portal/other-facilities/' %}" href="/portal/other-facilities/"><small>Other Facilities</small></a>
+                            <a class="list-group-item {% active request '/portal/laboratory-details/' %}" href="/portal/laboratory-details/"><small>Laboratory Details</small></a>
+                            <a class="list-group-item {% active request '/portal/library-books/' %}" href="/portal/library-books/"><small>Library Books</small></a>
+                            <a class="list-group-item {% active request '/portal/ejournals/' %}" href="/portal/ejournals/"><small>E-Journal</small></a>
+                            <a class="list-group-item {% active request '/portal/library-facilities/' %}" href="/portal/library-facilities/"><small>Library Facilities</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item {% active request '/portal/computation-facilities/' %}" href="/portal/computation-facilities/"><small>Computation Facilities</small></a>
+                            <a class="list-group-item {% active request '/portal/technical-staffs/' %}" href="/portal/technical-staffs/"><small>Technical Staff</small></a>
+                            <a class="list-group-item {% active request '/portal/jfdr-details/' %}" href="/portal/jfdr-details/"><small>JFDR Details</small></a>
+                            <a class="list-group-item {% active request '/portal/financial-details/' %}" href="/portal/financial-details/"><small>Financial Details</small></a>
+                            <a class="list-group-item {% active request '/portal/circulation-areas/' %}" href="/portal/circulation-areas/"><small>Circulation Area</small></a>
+                            <a class="list-group-item {% active request '/portal/operational-funds/' %}" href="/portal/operational-funds/"><small>Operational Funds</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item {% active request '/portal/admin-library-staff/' %}" href="/portal/admin-library-staff"><small>Admin &amp; Library Staff</small></a>
+                            <a class="list-group-item {% active request '/portal/fee-structure/' %}" href="/portal/fee-structure"><small>Fees Structure</small></a>
+                            <a class="list-group-item {% active request '/portal/hostel-facilities/' %}" href="/portal/hostel-facilities"><small>Hostel Facilities</small></a>
+                            <a class="list-group-item" href=""><small>Check Processing Fee</small></a>
+                            <a class="list-group-item" href=""><small>Payments</small></a>
+                            <a class="list-group-item" href=""><small>Anti-Ragging</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+
+                    <div class="col-lg-2">
+                        <div class="list-group">
+                            <a class="list-group-item"><small>AQIS History</small></a>
+                            <a class="list-group-item {% active request '/portal/head-of-institute/' %}" href="/portal/head-of-institute"><small>Head of Institute</small></a>
+                            <a class="list-group-item" href=""><small>Students Count</small></a>
+                            <a class="list-group-item" href=""><small>OMBUDSMAN/Greivance</small></a>
+                            <a class="list-group-item {% active request '/portal/grants-received/' %}" href="/portal/grants-received"><small>Grants Received</small></a>
+                            <a class="list-group-item" href=""><small>Other Links</small></a>
+                        </div> <!--/.list-group  -->
+                    </div> <!-- /column -->
+                </div> <!-- /.row -->
+            </div>
+        </div>
+    </div>
+</div> <!-- /.row -->

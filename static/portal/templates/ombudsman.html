@@ -1,0 +1,74 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ombudsman</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="grievance_committee">Grievance Committee</label>
+                                    {{ form.grievance_committee.errors }}
+                                    {% render_field form.grievance_committee class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="ombudsman_appointment">Ombudsman Appointment</label>
+                                    {{ form.ombudsman_appointment.errors }}
+                                    {% render_field form.ombudsman_appointment class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newombudsman_details' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with ombudsman_details=rid|get_ombudsman_details %}
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Action</th>
+                                    </tr>
+                                {% for ombudsman_detail in ombudsman_details %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a href="{% url 'portal:editombudsman_details' ombudsman_detail.ombudsman_id ombudsman_detail.id %}">Edit</a></td>
+                                        <td>{{ antiragging }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

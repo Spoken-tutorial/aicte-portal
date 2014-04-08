@@ -1,0 +1,123 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newadmin_library_staff' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if admin_library_staff %}
+                            <table class="table">
+                                <tr>
+                                    <th>title</th>
+                                    <th>first_name</th>
+                                    <th>middle_name</th>
+                                    <th>surname</th>
+                                    <th>mother_name</th>
+                                    <th>father_name</th>
+                                    <th>address1</th>
+                                    <th>address2</th>
+                                    <th>designation</th>
+                                    <th>date_of_join</th>
+                                    <th>date_of_birth</th>
+                                    <th>gender</th>
+                                    <th>state</th>
+                                    <th>district</th>
+                                    <th>location</th>
+                                    <th>city</th>
+                                    <th>res_phone</th>
+                                    <th>mobile_phone</th>
+                                    <th>phd</th>
+                                    <th>master_degree</th>
+                                    <th>bachelor_degree</th>
+                                    <th>diploma</th>
+                                    <th>other</th>
+                                    <th>designation</th>
+                                    <th>appointment_type</th>
+                                    <th>date_of_join</th>
+                                    <th>position</th>
+                                    <th>pf_number</th>
+                                    <th>salary_type</th>
+                                    <th>salary_mode</th>
+                                    <th>gross_pay_month</th>
+                                    <th>bank_name</th>
+                                    <th>bank_account_no</th>
+                                    <th>ifsc_code</th>
+                                    <th>pan_number</th>
+                                    <th>left_institute</th>
+                                </tr>
+                                {% for staff in admin_library_staff %}
+                                    <tr>
+                                        <td> {{ staff.title }} </td> 
+                                        <td> {{ staff.first_name }} </td>
+                                        <td> {{ staff.middle_name }} </td>
+                                        <td> {{ staff.surname }} </td>
+                                        <td> {{ staff.mother_name }} </td>
+                                        <td> {{ staff.father_name }} </td>
+                                        <td> {{ staff.address1 }} </td>
+                                        <td> {{ staff.address2 }} </td>
+                                        <td> {{ staff.designation }} </td>
+                                        <td> {{ staff.date_of_join }} </td>
+                                        <td> {{ staff.date_of_birth }} </td>
+                                        <td> {{ staff.gender }} </td>
+                                        <td> {{ staff.state }} </td>
+                                        <td> {{ staff.district }} </td>
+                                        <td> {{ staff.location }} </td>
+                                        <td> {{ staff.city }} </td>
+                                        <td> {{ staff.res_phone }} </td>
+                                        <td> {{ staff.mobile_phone }} </td>
+                                        <td> {{ staff.phd }} </td>
+                                        <td> {{ staff.master_degree }} </td>
+                                        <td> {{ staff.bachelor_degree }} </td>
+                                        <td> {{ staff.diploma }} </td>
+                                        <td> {{ staff.other }} </td>
+                                        <td> {{ staff.designation }} </td>
+                                        <td> {{ staff.appointment_type }} </td>
+                                        <td> {{ staff.date_of_join }} </td>
+                                        <td> {{ staff.position }} </td>
+                                        <td> {{ staff.pf_number }} </td>
+                                        <td> {{ staff.salary_type }} </td>
+                                        <td> {{ staff.salary_mode }} </td>
+                                        <td> {{ staff.gross_pay_month }} </td>
+                                        <td> {{ staff.bank_name }} </td>
+                                        <td> {{ staff.bank_account_no }} </td>
+                                        <td> {{ staff.ifsc_code }} </td>
+                                        <td> {{ staff.pan_number }} </td>
+                                        <td> {{ staff.left_institute }} </td>
+
+                                        <td><a href="{% url 'portal:editadmin_library_staff' staff.application_id staff.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

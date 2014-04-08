@@ -1,0 +1,67 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newcirculation_areas' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if circulation_areas %}
+                            <table class="table">
+                                <tr>
+                                    <th>Area Type</th>
+                                    <th>Carper Area</th>
+                                    <th>Flooring</th>
+                                    <th>Painting</th>
+                                    <th>Sanitary</th>
+                                    <th>Electric Light</th>
+                                    <th>Furniture</th>
+                                    <th>Building Detail</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for circulation_area in circulation_areas %}
+                                    <tr>
+                                        <td>{{ circulation_area.area_type|area_type }}</td>
+                                        <td>{{ circulation_area.carpet_area }}</td>
+                                        <td>{% if circulation_area.flooring %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if circulation_area.painting %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if circulation_area.sanitary %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if circulation_area.electric_light %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if circulation_area.furniture %} Yes {% else %} No {% endif %}</td>
+                                        <th>{{ circulation_area.per_building_detail }}</th>
+                                        <td><a href="{% url 'portal:editcirculation_areas' circulation_area.application_id circulation_area.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

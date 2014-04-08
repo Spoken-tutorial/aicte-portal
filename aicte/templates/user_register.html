@@ -1,0 +1,39 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+
+{% block content%}
+    <form class="form-signin" role="form" action="{% url 'user_register' %}" method="POST"> {% csrf_token %}
+        <h2 class="form-signin-heading">Registration form</h2>
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            {{ form.first_name.errors }}
+            {% render_field form.first_name class+='form-control' %}
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            {{ form.last_name.errors }}
+            {% render_field form.last_name class+='form-control' %}
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            {{ form.email.errors }}
+            {% render_field form.email class+='form-control' %}
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            {{ form.username.errors }}
+            {% render_field form.username class+='form-control' %}
+        </div>
+        <div class="form-group">
+            <label for="password1">Password</label>
+            {{ form.password1.errors }}
+            {% render_field form.password1 class+='form-control' %}
+        </div>
+        <div class="form-group">
+            <label for="password2">Re-type Password</label>
+            {{ form.password2.errors }}
+            {% render_field form.password2 class+='form-control' %}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+{% endblock %}

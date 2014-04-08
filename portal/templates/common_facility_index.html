@@ -1,0 +1,56 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Common Facility</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newcommon_facility' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if common_facilities %}
+                            <table class="table">
+                                <tr>
+                                    <th>Building Name</th>
+                                    <th>Room type</th>
+                                    <th>Room Name</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for common_facility in common_facilities %}
+                                    <tr>
+                                        <td>{{ common_facility.per_building_detail }}</td>
+                                        <td>{{ common_facility.room_type }}</td>
+                                        <td>{{ common_facility.room_id_name }}</td>
+                                        <td><a href="{% url 'portal:editcommon_facility' common_facility.application_id common_facility.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

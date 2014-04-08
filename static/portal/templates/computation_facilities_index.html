@@ -1,0 +1,64 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Computation Facilities</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newcomputation_facilities' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if computation_facilities %}
+                            <table class="table">
+                                <tr>
+                                    <th>Student PCs</th>
+                                    <th>Library PCs</th>
+                                    <th>Admin Office</th>
+                                    <th>Faculty PCs</th>
+                                    <th>Internet Bandwidth</th>
+                                    <th>Printers</th>
+                                    <th>Legal Software</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for computation_facilities in computation_facilities %}
+                                    <tr>
+                                        <td>{{ computation_facilities.pcs_to_students }}</td>
+                                        <td>{{ computation_facilities.pcs_library }}</td>
+                                        <td>{{ computation_facilities.pcs_admin_office }}</td>
+                                        <td>{{ computation_facilities.pcs_faculty }}</td>
+                                        <td>{{ computation_facilities.internet_bandwidth }}</td>
+                                        <td>{% if computation_facilities.legal_app_software %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if computation_facilities.printers_available %} Yes {% else %} No {% endif %}</td>
+                                        <td><a href="{% url 'portal:editcomputation_facilities' computation_facilities.application_id computation_facilities.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

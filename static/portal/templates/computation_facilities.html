@@ -1,0 +1,107 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Building Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="pcs_to_students">pcs_to_students</label>
+                                    {{ form.pcs_to_students.errors }}
+                                    {% render_field form.pcs_to_students class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pcs_library">pcs_library</label>
+                                    {{ form.pcs_library.errors }}
+                                    {% render_field form.pcs_library class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pcs_admin_office">pcs_admin_office</label>
+                                    {{ form.pcs_admin_office.errors }}
+                                    {% render_field form.pcs_admin_office class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pcs_faculty">pcs_faculty</label>
+                                    {{ form.pcs_faculty.errors }}
+                                    {% render_field form.pcs_faculty class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="internet_bandwidth">internet_bandwidth</label>
+                                    {{ form.internet_bandwidth.errors }}
+                                    {% render_field form.internet_bandwidth class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="internet_conn_ratio">internet_conn_ratio</label>
+                                    {{ form.internet_conn_ratio.errors }}
+                                    {% render_field form.internet_conn_ratio class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="printers_available">printers_available</label>
+                                    {{ form.printers_available.errors }}
+                                    {% render_field form.printers_available class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="legal_app_software">legal_app_software</label>
+                                    {{ form.legal_app_software.errors }}
+                                    {% render_field form.legal_app_software class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:perbuilding' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with perbuildings=user|get_perbuilding %}
+                                    <tr>
+                                        <th>Building Name</th>
+                                        <th>BUilding Name</th>
+                                        <th>Building Area</th>
+                                        <th>Action</th>
+                                    </tr>
+                                {% for perbuilding in perbuildings %}
+                                    <tr>
+                                        <td>{{ perbuilding.building_name }}</td>
+                                        <td>{{ perbuilding.building_number }}</td>
+                                        <td>{{ perbuilding.sanct_build_area }}</td>
+                                        <td><a href="{% url 'portal:editperbuilding' perbuilding.building_detail_id perbuilding.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

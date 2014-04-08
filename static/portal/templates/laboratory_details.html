@@ -1,0 +1,122 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Laboratory Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="program">program</label>
+                                    {{ form.program.errors }}
+                                    {% render_field form.program class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">department</label>
+                                    {{ form.department.errors }}
+                                    {% render_field form.department class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="course">course</label>
+                                    {{ form.course.errors }}
+                                    {% render_field form.course class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="level">level</label>
+                                    {{ form.level.errors }}
+                                    {% render_field form.level class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipment_budget">equipment_budget</label>
+                                    {{ form.equipment_budget.errors }}
+                                    {% render_field form.equipment_budget class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="consumable_budget">consumable_budget</label>
+                                    {{ form.consumable_budget.errors }}
+                                    {% render_field form.consumable_budget class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="research_lab">research_lab</label>
+                                    {{ form.research_lab.errors }}
+                                    {% render_field form.research_lab class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="lab_name">lab_name</label>
+                                    {{ form.lab_name.errors }}
+                                    {% render_field form.lab_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="lab_equipments">lab_equipments</label>
+                                    {{ form.lab_equipments.errors }}
+                                    {% render_field form.lab_equipments class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="investment_till_date">investment_till_date</label>
+                                    {{ form.investment_till_date.errors }}
+                                    {% render_field form.investment_till_date class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_land_detail">per_land_detail</label>
+                                    {{ form.per_land_detail.errors }}
+                                    {% render_field form.per_land_detail class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+                {% if rid %}
+                    <a class = "btn btn-primary" href="{% url 'portal:perbuilding' rid %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {% with perbuildings=user|get_perbuilding %}
+                                    <tr>
+                                        <th>Building Name</th>
+                                        <th>BUilding Name</th>
+                                        <th>Building Area</th>
+                                        <th>Action</th>
+                                    </tr>
+                                {% for perbuilding in perbuildings %}
+                                    <tr>
+                                        <td>{{ perbuilding.building_name }}</td>
+                                        <td>{{ perbuilding.building_number }}</td>
+                                        <td>{{ perbuilding.sanct_build_area }}</td>
+                                        <td><a href="{% url 'portal:editperbuilding' perbuilding.building_detail_id perbuilding.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endwith %}
+                        </table>
+                    </div>
+                {% endif %}
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

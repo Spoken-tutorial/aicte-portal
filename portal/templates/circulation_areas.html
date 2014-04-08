@@ -1,0 +1,84 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="area_type">area_type</label>
+                                    {{ form.area_type.errors }}
+                                    {% render_field form.area_type class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="carpet_area">carpet_area</label>
+                                    {{ form.carpet_area.errors }}
+                                    {% render_field form.carpet_area class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="flooring">flooring</label>
+                                    {{ form.flooring.errors }}
+                                    {% render_field form.flooring class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="painting">painting</label>
+                                    {{ form.painting.errors }}
+                                    {% render_field form.painting class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="sanitary">sanitary</label>
+                                    {{ form.sanitary.errors }}
+                                    {% render_field form.sanitary class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="electric_light">electric_light</label>
+                                    {{ form.electric_light.errors }}
+                                    {% render_field form.electric_light class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="furniture">furniture</label>
+                                    {{ form.furniture.errors }}
+                                    {% render_field form.furniture class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="per_building_detail">per_building_detail</label>
+                                    {{ form.per_building_detail.errors }}
+                                    {% render_field form.per_building_detail class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

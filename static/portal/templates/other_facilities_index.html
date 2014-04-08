@@ -1,0 +1,56 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Other Facilities</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newother_facility' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if other_facilities %}
+                            <table class="table">
+                                <tr>
+                                    <th>Water Supply</th>
+                                    <th>Electric Supply</th>
+                                    <th>Website</th>
+                                    <th>Action</th>
+                                </tr>
+                                {% for other_facility in other_facilities %}
+                                    <tr>
+                                        <td>{% if other_facility.potable_water_supply %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if other_facility.electric_supply %} Yes {% else %} No {% endif %}</td>
+                                        <td>{% if other_facility.website %} Yes {% else %} No {% endif %}</td>
+                                        <td><a href="{% url 'portal:editother_facility' other_facility.application_id other_facility.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

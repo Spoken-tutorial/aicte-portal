@@ -1,0 +1,108 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newhead_of_institute' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if heads_of_institute %}
+                            <table class="table">
+                                <tr>
+                                    <th> surname </th>
+                                    <th> first_name </th>
+                                    <th> father_name </th>
+                                    <th> mother_name </th>
+                                    <th> date_of_birth </th>
+                                    <th> mobile_number </th>
+                                    <th> std_code </th>
+                                    <th> land_phone </th>
+                                    <th> fax_number </th>
+                                    <th> email </th>
+                                    <th> pan_number </th>
+                                    <th> doctorate_degree </th>
+                                    <th> master_degree </th>
+                                    <th> bachelor_degree </th>
+                                    <th> other_qualification </th>
+                                    <th> international_certificate </th>
+                                    <th> specialization </th>
+                                    <th> date_of_join </th>
+                                    <th> appointment_type </th>
+                                    <th> designation </th>
+                                    <th> teaching_experience </th>
+                                    <th> research_experience </th>
+                                    <th> industry_experience </th>
+                                    <th> research_guided_ug </th>
+                                    <th> research_guided_pg </th>
+                                    <th> research_guided_phd </th>
+                                    <th> books_published </th>
+                                    <th> national_level_paper </th>
+                                    <th> international_level_paper </th>
+                                </tr>
+                                {% for head_of_institute in heads_of_institute %}
+                                    <tr>
+                                        <td> {{ head_of_institute.surname }} </td>
+                                        <td> {{ head_of_institute.first_name }} </td>
+                                        <td> {{ head_of_institute.father_name }} </td>
+                                        <td> {{ head_of_institute.mother_name }} </td>
+                                        <td> {{ head_of_institute.date_of_birth }} </td>
+                                        <td> {{ head_of_institute.mobile_number }} </td>
+                                        <td> {{ head_of_institute.std_code }} </td>
+                                        <td> {{ head_of_institute.land_phone }} </td>
+                                        <td> {{ head_of_institute.fax_number }} </td>
+                                        <td> {{ head_of_institute.email }} </td>
+                                        <td> {{ head_of_institute.pan_number }} </td>
+                                        <td> {{ head_of_institute.doctorate_degree }} </td>
+                                        <td> {{ head_of_institute.master_degree }} </td>
+                                        <td> {{ head_of_institute.bachelor_degree }} </td>
+                                        <td> {{ head_of_institute.other_qualification }} </td>
+                                        <td> {{ head_of_institute.international_certificate }} </td>
+                                        <td> {{ head_of_institute.specialization }} </td>
+                                        <td> {{ head_of_institute.date_of_join }} </td>
+                                        <td> {{ head_of_institute.appointment_type }} </td>
+                                        <td> {{ head_of_institute.designation }} </td>
+                                        <td> {{ head_of_institute.teaching_experience }} </td>
+                                        <td> {{ head_of_institute.research_experience }} </td>
+                                        <td> {{ head_of_institute.industry_experience }} </td>
+                                        <td> {{ head_of_institute.research_guided_ug }} </td>
+                                        <td> {{ head_of_institute.research_guided_pg }} </td>
+                                        <td> {{ head_of_institute.research_guided_phd }} </td>
+                                        <td> {{ head_of_institute.books_published }} </td>
+                                        <td> {{ head_of_institute.national_level_paper }} </td>
+                                        <td> {{ head_of_institute.international_level_paper }} </td>
+                                        <td><a href="{% url 'portal:edithead_of_institute' head_of_institute.application_id head_of_institute.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

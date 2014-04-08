@@ -1,0 +1,78 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Library Book</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newgrants_received' application %}">New</a>
+                    <div class="table-responsive">
+                        {% if grants_received %}
+                            <table class="table">
+                                <tr>
+                                    <th> name_of_grant </th>
+                                    <th> sanctioned_year </th>
+                                    <th> sanction_letter_no </th>
+                                    <th> sanctioned_date </th>
+                                    <th> receiving_date </th>
+                                    <th> conducted_from </th>
+                                    <th> conducted_upto </th>
+                                    <th> final_util_certificate </th>
+                                    <th> util_certificate_refno </th>
+                                    <th> date_of_submission_final_util_certificate </th>
+                                    <th> final_settlement_of_grant </th>
+                                    <th> grant_tobe_received </th>
+                                    <th> grant_tobe_returned </th>
+                                    <th> remarks </th>
+                                </tr>
+                                {% for grant in grants_received %}
+                                    <tr>
+                                        <td> {{ grant.name_of_grant }} </td>
+                                        <td> {{ grant.sanctioned_year }} </td>
+                                        <td> {{ grant.sanction_letter_no }} </td>
+                                        <td> {{ grant.sanctioned_date }} </td>
+                                        <td> {{ grant.receiving_date }} </td>
+                                        <td> {{ grant.conducted_from }} </td>
+                                        <td> {{ grant.conducted_upto }} </td>
+                                        <td> {{ grant.final_util_certificate }} </td>
+                                        <td> {{ grant.util_certificate_refno }} </td>
+                                        <td> {{ grant.date_of_submission_final_util_certificate }} </td>
+                                        <td> {{ grant.final_settlement_of_grant }} </td>
+                                        <td> {{ grant.grant_tobe_received }} </td>
+                                        <td> {{ grant.grant_tobe_returned }} </td>
+                                        <td> {{ grant.remarks }} </td>
+                                        <td><a href="{% url 'portal:editgrants_received' grant.application_id grant.id %}">Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="surname">surname</label>
+                                    {{ form.surname.errors }}
+                                    {% render_field form.surname class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="first_name">first_name</label>
+                                    {{ form.first_name.errors }}
+                                    {% render_field form.first_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="father_name">father_name</label>
+                                    {{ form.father_name.errors }}
+                                    {% render_field form.father_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="mother_name">mother_name</label>
+                                    {{ form.mother_name.errors }}
+                                    {% render_field form.mother_name class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_birth">date_of_birth</label>
+                                    {{ form.date_of_birth.errors }}
+                                    {% render_field form.date_of_birth class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile_number">mobile_number</label>
+                                    {{ form.mobile_number.errors }}
+                                    {% render_field form.mobile_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="std_code">std_code</label>
+                                    {{ form.std_code.errors }}
+                                    {% render_field form.std_code class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="land_phone">land_phone</label>
+                                    {{ form.land_phone.errors }}
+                                    {% render_field form.land_phone class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="fax_number">fax_number</label>
+                                    {{ form.fax_number.errors }}
+                                    {% render_field form.fax_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">email</label>
+                                    {{ form.email.errors }}
+                                    {% render_field form.email class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pan_number">pan_number</label>
+                                    {{ form.pan_number.errors }}
+                                    {% render_field form.pan_number class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="doctorate_degree">doctorate_degree</label>
+                                    {{ form.doctorate_degree.errors }}
+                                    {% render_field form.doctorate_degree class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="master_degree">master_degree</label>
+                                    {{ form.master_degree.errors }}
+                                    {% render_field form.master_degree class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="bachelor_degree">bachelor_degree</label>
+                                    {{ form.bachelor_degree.errors }}
+                                    {% render_field form.bachelor_degree class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="other_qualification">other_qualification</label>
+                                    {{ form.other_qualification.errors }}
+                                    {% render_field form.other_qualification class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="international_certificate">international_certificate</label>
+                                    {{ form.international_certificate.errors }}
+                                    {% render_field form.international_certificate class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="specialization">specialization</label>
+                                    {{ form.specialization.errors }}
+                                    {% render_field form.specialization class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_of_join">date_of_join</label>
+                                    {{ form.date_of_join.errors }}
+                                    {% render_field form.date_of_join class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="appointment_type">appointment_type</label>
+                                    {{ form.appointment_type.errors }}
+                                    {% render_field form.appointment_type class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="designation">designation</label>
+                                    {{ form.designation.errors }}
+                                    {% render_field form.designation class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="teaching_experience">teaching_experience</label>
+                                    {{ form.teaching_experience.errors }}
+                                    {% render_field form.teaching_experience class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="research_experience">research_experience</label>
+                                    {{ form.research_experience.errors }}
+                                    {% render_field form.research_experience class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="industry_experience">industry_experience</label>
+                                    {{ form.industry_experience.errors }}
+                                    {% render_field form.industry_experience class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="research_guided_ug">research_guided_ug</label>
+                                    {{ form.research_guided_ug.errors }}
+                                    {% render_field form.research_guided_ug class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="research_guided_pg">research_guided_pg</label>
+                                    {{ form.research_guided_pg.errors }}
+                                    {% render_field form.research_guided_pg class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="research_guided_phd">research_guided_phd</label>
+                                    {{ form.research_guided_phd.errors }}
+                                    {% render_field form.research_guided_phd class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="books_published">books_published</label>
+                                    {{ form.books_published.errors }}
+                                    {% render_field form.books_published class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="national_level_paper">national_level_paper</label>
+                                    {{ form.national_level_paper.errors }}
+                                    {% render_field form.national_level_paper class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="international_level_paper">international_level_paper</label>
+                                    {{ form.international_level_paper.errors }}
+                                    {% render_field form.international_level_paper class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

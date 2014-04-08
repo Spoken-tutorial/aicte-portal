@@ -1,0 +1,129 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load portaldata %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <form role="form" action="" method="POST"> {% csrf_token %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="income_central">income_central</label>
+                                    {{ form.income_central.errors }}
+                                    {% render_field form.income_central class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_state">income_state</label>
+                                    {{ form.income_state.errors }}
+                                    {% render_field form.income_state class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_student">income_student</label>
+                                    {{ form.income_student.errors }}
+                                    {% render_field form.income_student class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_donation">income_donation</label>
+                                    {{ form.income_donation.errors }}
+                                    {% render_field form.income_donation class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_ugc">income_ugc</label>
+                                    {{ form.income_ugc.errors }}
+                                    {% render_field form.income_ugc class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_other_bodies">income_other_bodies</label>
+                                    {{ form.income_other_bodies.errors }}
+                                    {% render_field form.income_other_bodies class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="income_revenue">income_revenue</label>
+                                    {{ form.income_revenue.errors }}
+                                    {% render_field form.income_revenue class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="total_income">total_income</label>
+                                    {{ form.total_income.errors }}
+                                    {% render_field form.total_income class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="salary_tech_staff">salary_tech_staff</label>
+                                    {{ form.salary_tech_staff.errors }}
+                                    {% render_field form.salary_tech_staff class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="remuneration_guest">remuneration_guest</label>
+                                    {{ form.remuneration_guest.errors }}
+                                    {% render_field form.remuneration_guest class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="salary_nontech_staff">salary_nontech_staff</label>
+                                    {{ form.salary_nontech_staff.errors }}
+                                    {% render_field form.salary_nontech_staff class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="library">library</label>
+                                    {{ form.library.errors }}
+                                    {% render_field form.library class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="equipment">equipment</label>
+                                    {{ form.equipment.errors }}
+                                    {% render_field form.equipment class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="building_mgmt">building_mgmt</label>
+                                    {{ form.building_mgmt.errors }}
+                                    {% render_field form.building_mgmt class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="other_expense">other_expense</label>
+                                    {{ form.other_expense.errors }}
+                                    {% render_field form.other_expense class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="total_expense">total_expense</label>
+                                    {{ form.total_expense.errors }}
+                                    {% render_field form.total_expense class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="surplus_deficit">surplus_deficit</label>
+                                    {{ form.surplus_deficit.errors }}
+                                    {% render_field form.surplus_deficit class+='form-control' %}
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row  -->
+                        {% endwith %} 
+                        <input class="btn btn-lg btn-primary col-lg-2" type="submit">
+                    </form>
+                </div>
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}
