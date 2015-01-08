@@ -16,7 +16,7 @@ class InstitutionDetailForm(forms.ModelForm):
         label='Location',  widget = forms.Select(attrs = {'class' : 'ac-location'}), queryset = Location.objects.none(), empty_label = "--- None ---"
     )
     first_course_year = forms.CharField(max_length = 4)
-    std_code = forms.CharField(max_length = 3)
+    std_code = forms.CharField(max_length = 6)
     land_phone = forms.CharField(max_length = 10)
     cell_phone = forms.CharField(max_length = 10)
     fax_number = forms.CharField(max_length = 10)
@@ -459,7 +459,7 @@ class GrantsReceivedForm(forms.ModelForm):
 class StudentDetailForm(forms.ModelForm):
     class Meta:
         model = StudentDetail 
-        exclude = ['application']
+        exclude = ['application_year']
 
 class EjournalForm(forms.ModelForm):
     class Meta:

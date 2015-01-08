@@ -9,6 +9,38 @@ from datetime import datetime
 from portal.forms import *
 from portal.models import *
 import json
+from django.core.mail import EmailMultiAlternatives
+
+def test(request):
+    user = request.user
+    user.email = "k.sanmugam2@gmail.com"
+    # Sending email when an answer is posted
+    subject = 'Question has been answered'
+    message = """
+        Dear {0}<br><br>
+        Your question titled <b>"{1}"</b> has been answered.<br>
+        Link: {2}<br><br>
+        Regards,<br>
+        Spoken Tutorial Forums
+    """.format(
+        "sanmugam", 
+        "test", 
+        'http://forums.spoken-tutorial.org/question/'
+    )
+    
+    email = EmailMultiAlternatives(
+        subject,'', 'forums', 
+        [user.email],
+        headers={"Content-type":"text/html;charset=iso-8859-1"}
+    )
+    
+    email.attach_alternative(message, "text/html")
+    result = email.send(fail_silently=True)
+    print "**********"
+    print user.email
+    print "status", result
+    # End of email send
+    print "yes"
 
 def current_year():
     return datetime.now().year
@@ -1176,20 +1208,21 @@ def student_details(request, application_id = None, student_details_id = None):
     user = request.user
     if application_id == None and student_details_id == None:
         application =  Application.objects.get(user = user)
-        student_details = StudentDetail.objects.filter(application = application)
+	application_year = ApplicationYear.objects.filter(user = user)
+        student_details = StudentDetail.objects.filter(application_year = application_year)
         context = {
             'student_details': student_details,
-            'application': application.id
+            'application': application_year.last()
         }
-        return render(request, 'portal/templates/student_details.html', context)
+        return render(request, 'portal/templates/student_details_index.html', context)
 
     if request.method == 'POST':
         form = StudentDetailForm(request.POST)
         if form.is_valid():
             form_data = form.save(commit=False)
-            if student_detail_id:
+            if student_details_id:
                 form_data.id = student_details_id
-            form_data.application_id = application_id
+            form_data.application_year_id = application_id
             form_data.save()
             return HttpResponseRedirect("/portal/student-details/")
     else:

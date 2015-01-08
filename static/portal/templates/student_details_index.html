@@ -1,0 +1,124 @@
+{% extends 'portal/templates/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+    {% include 'portal/templates/secondary_nav.html' %}
+    {% include 'portal/templates/quick_links.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Student Details</h3>
+                </div> <!-- /#panel-heading -->
+                <div class="panel-body">
+                    {% if alert_success %}
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_success }}
+                        </div>
+                    {% endif %}
+                    {% if alert_danger %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ alert_danger }}
+                        </div>
+                    {% endif %}
+                    <a class = "btn btn-primary" href="{% url 'portal:newstudent_details' application.id %}">New</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+				    <th>Action</th>
+				    <th>Title</th>
+				    <th>First Name</th>
+				    <th>Middle Name</th>
+				    <th>Surname</th>
+				    <th>Mother's Name</th>
+				    <th>Father's Name</th>
+				    <th>Phone</th>
+				    <th>Mobile Number</th>
+				    <th>Gender</th>
+				    <th>D.O.B</th>
+				    <th>Status</th>
+				    <th>Program</th>
+				    <th>Course</th>
+				    <th>Level</th>
+				    <th>Date of Joining the Institute</th>
+				    <th>Admitted to</th>
+				    <th>Roll Number</th>
+				    <th>Email</th>
+				    <th>Religion</th>
+				    <th>Caste</th>
+				    <th>Reserve Category</th>
+				    <th>Is Physically Handicapped</th>
+				    <th>Econ Backward</th>
+				    <th>Home/Hostel</th>
+				    <th>Institute Fees Paid</th>
+				    <th>Hostel Fees(Month)</th>
+				    <th>Year 1 (% marks)</th>
+				    <th>Year 2 (% marks)</th>
+				    <th>Year 3 (% marks)</th>
+				    <th>Year 4 (% marks)</th>
+				    <th>Year 5 (% marks)</th>
+				    <th>Aadhaar Card</th>
+				    <th>Enrollemnt Id</th>
+				    <th>Gate Score</th>
+				    <th>Gate Exam Number</th>
+				    <th>Gate Score Year Valid From</th>
+				    <th>Gate Score Year Valid To</th>
+
+
+                            </tr>
+                            {% for student in student_details %}
+                                <tr>
+                                        <td><a href="{% url 'portal:editstudent_details' student.application_year_id student.id %}">Edit</a></td>
+					<td>{{ student.title }}</td>
+					<td>{{ student.first_name }}</td>
+					<td>{{ student.middle_name }}</td>
+					<td>{{ student.surname }}</td>
+					<td>{{ student.mothers_name }}</td>
+					<td>{{ student.fathers_name }}</td>
+					<td>{{ student.res_phone }}</td>
+					<td>{{ student.mobile_number }}</td>
+					<td>{{ student.gender }}</td>
+					<td>{{ student.date_of_birth }}</td>
+					<td>{{ student.status }}</td>
+					<td>{{ student.program }}</td>
+					<td>{{ student.course }}</td>
+					<td>{{ student.level }}</td>
+					<td>{{ student.date_of_joining_the_institute }}</td>
+					<td>{{ student.admitted_to }}</td>
+					<td>{{ student.roll_number }}</td>
+					<td>{{ student.email_address }}</td>
+					<td>{{ student.religion }}</td>
+					<td>{{ student.caste }}</td>
+					<td>{{ student.reserve_category }}</td>
+					<td>{{ student.is_physically_handicapped }}</td>
+					<td>{{ student.econ_backward }}</td>
+					<td>{{ student.home_hostel }}</td>
+					<td>{{ student.institute_fees_paid }}</td>
+					<td>{{ student.hostel_fees_month }}</td>
+					<td>{{ student.year1 }}</td>
+					<td>{{ student.year2 }}</td>
+					<td>{{ student.year3 }}</td>
+					<td>{{ student.year4 }}</td>
+					<td>{{ student.year5 }}</td>
+					<td>{{ student.aadhaar_card }}</td>
+					<td>{{ student.enrollemnt_id }}</td>
+					<td>{{ student.gate_score }}</td>
+					<td>{{ student.gate_exam_number }}</td>
+					<td>{{ student.gate_score_year_valid_from }}</td>
+					<td>{{ student.gate_score_year_valid_to }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                </div> <!-- /.panel-body -->
+            </div> <!-- /.panel -->
+        </div> <!-- /.col -->
+    </div> <!-- /.row -->
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'portal/js/portal.js' %}"></script>
+{% endblock %}

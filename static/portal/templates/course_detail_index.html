@@ -30,6 +30,7 @@
                             <tr>
                                 <th>Program</th>
                                 <th>Affiliating Board</th>
+                                <th>Name of the Course</th>
                                 <th>Year Started</th>
                                 <th>Level</th>
                                 <th>Status</th>
@@ -37,10 +38,11 @@
                             </tr>
                             {% for course in course_details %}
                                 <tr>
-                                    <td>{{ course.course }}</td>
+                                    <td>{{ course.program }}</td>
                                     <td>{{ course.affiliating_board }}</td>
+                                    <td>{{ course.course }}</td>
+                                    <td>{{ course.level }}</td>
                                     <td>{{ course.year_started }}</td>
-                                    <td>{{ course.full_part_time }}</td>
                                     <td>{% if course.status %} Available {% else %} Not Available {% endif %}</td>
                                     <td><a href="{% url 'portal:editcourse_detail' course.application_id course.id %}">Edit</a></td>
                                 </tr>

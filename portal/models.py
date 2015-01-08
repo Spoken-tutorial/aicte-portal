@@ -161,7 +161,7 @@ class ContactDetail(models.Model):
 
 class LandDetail(models.Model):
     location = models.PositiveSmallIntegerField()
-    total_area_acres = models.DecimalField(max_digits = 5, decimal_places = 2)
+    total_area_acres = models.DecimalField(max_digits = 8, decimal_places = 2)
     land_reg_with = models.CharField(max_length = 255)
     date_of_reg = models.DateField()
     north_hilly_area = models.BooleanField()

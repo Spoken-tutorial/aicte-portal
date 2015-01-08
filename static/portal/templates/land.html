@@ -50,9 +50,11 @@
                                     {% render_field form.date_of_reg class+='form-control date' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="north_hilly_area">Land in North Hilly Area</label>
-                                    {{ form.north_hilly_area.errors }}
-                                    {% render_field form.north_hilly_area class+='form-control' %}
+                                    <label for="north_hilly_area">
+                                    	{% render_field form.north_hilly_area %}
+					&nbsp;Land in North Hilly Area 
+                                    	{{ form.north_hilly_area.errors }}
+				    </label>
                                 </div>
                                 <div class="form-group">
                                     <label for="no_of_pieces">Number of Pieces</label>
@@ -79,10 +81,14 @@
                                     {{ form.ownership_details.errors }}
                                     {% render_field form.ownership_details class+='form-control' %}
                                 </div>
+			</div>
+			<div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="land_mordgaged">is the Land Mordgaged</label>
-                                    {{ form.land_mordgaged.errors }}
-                                    {% render_field form.land_mordgaged class+='form-control' %}
+                                    <label for="land_mordgaged">
+                                    	{% render_field form.land_mordgaged %}
+					&nbsp;Is the Land Mordgaged
+				    </label>
+                                    	{{ form.land_mordgaged.errors }}
                                 </div>
                                 <div class="form-group">
                                     <label for="latitude_ns">Latitude(North/South)</label>

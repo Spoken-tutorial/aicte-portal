@@ -26,90 +26,97 @@
                         </div>
                     {% endif %}
                     <form role="form" action="" method="POST"> {% csrf_token %}
-                        {{ form }}
-                        <!--{% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
+                        {% with WIDGET_ERROR_CLASS='my_error' WIDGET_REQUIRED_CLASS='my_required' %}
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="name">Organisation Name</label>
-                                    {{ form.name.errors }}
-                                    {% render_field form.name class+='form-control' %}
+                                    <label for="building_name">building_name</label>
+                                    {{ form.building_name.errors }}
+                                    {% render_field form.building_name class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="organisation_type">Organisation Type</label>
-                                    {{ form.organisation_type.errors }}
-                                    {% render_field form.organisation_type class+='form-control' %}
+                                    <label for="building_number">building_number</label>
+                                    {{ form.building_number.errors }}
+                                    {% render_field form.building_number class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="registered_with">Registered With</label>
-                                    {{ form.registered_with.errors }}
-                                    {% render_field form.registered_with class+='form-control' %}
+                                    <label for="sanct_build_area">sanct_build_area</label>
+                                    {{ form.sanct_build_area.errors }}
+                                    {% render_field form.sanct_build_area class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="registered_date">Registered Date</label>
-                                    {{ form.registered_date.errors }}
-                                    {% render_field form.registered_date class+='form-control date' %}
+                                    <label for="const_build_area">const_build_area</label>
+                                    {{ form.const_build_area.errors }}
+                                    {% render_field form.const_build_area class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="registered_number">Registered Number</label>
-                                    {{ form.registered_number.errors }}
-                                    {% render_field form.registered_number class+='form-control' %}
+                                    <label for="approved_carpet_area_inst">approved_carpet_area_inst</label>
+                                    {{ form.approved_carpet_area_inst.errors }}
+                                    {% render_field form.approved_carpet_area_inst class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    {{ form.address.errors }}
-                                    {% render_field form.address class+='form-control' %}
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="state">State</label>
-                                    {{ form.state.errors }}
-                                    {% render_field form.state class+='form-control' %}
+                                    <label for="const_carpet_area_inst">const_carpet_area_inst</label>
+                                    {{ form.const_carpet_area_inst.errors }}
+                                    {% render_field form.const_carpet_area_inst class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="district">District</label>
-                                    {{ form.district.errors }}
-                                    {% render_field form.district class+='form-control' %}
+                                    <label for="approved_carpet_area_admin">approved_carpet_area_admin</label>
+                                    {{ form.approved_carpet_area_admin.errors }}
+                                    {% render_field form.approved_carpet_area_admin class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Location</label>
-                                    {{ form.location.errors }}
-                                    {% render_field form.location class+='form-control' %}
+                                    <label for="const_carpet_area_admin">const_carpet_area_admin</label>
+                                    {{ form.const_carpet_area_admin.errors }}
+                                    {% render_field form.const_carpet_area_admin class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="city">City</label>
-                                    {{ form.city.errors }}
-                                    {% render_field form.city class+='form-control' %}
+                                    <label for="approved_carpet_area_amen">approved_carpet_area_amen</label>
+                                    {{ form.approved_carpet_area_amen.errors }}
+                                    {% render_field form.approved_carpet_area_amen class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="std_code">STD Code</label>
-                                    {{ form.std_code.errors }}
-                                    {% render_field form.std_code class+='form-control' %}
+                                    <label for="const_carpet_area_amen">const_carpet_area_amen</label>
+                                    {{ form.const_carpet_area_amen.errors }}
+                                    {% render_field form.const_carpet_area_amen class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="land_phone">Land Phone</label>
-                                    {{ form.land_phone.errors }}
-                                    {% render_field form.land_phone class+='form-control' %}
+                                    <label for="total_area_approved">total_area_approved</label>
+                                    {{ form.total_area_approved.errors }}
+                                    {% render_field form.total_area_approved class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="cell_phone">Cell Phone</label>
-                                    {{ form.cell_phone.errors }}
-                                    {% render_field form.cell_phone class+='form-control' %}
+                                    <label for="total_area_constructed">total_area_constructed</label>
+                                    {{ form.total_area_constructed.errors }}
+                                    {% render_field form.total_area_constructed class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="fax_number">Fax Number</label>
-                                    {{ form.fax_number.errors }}
-                                    {% render_field form.fax_number class+='form-control' %}
+                                    <label for="activities_conducted">activities_conducted</label>
+                                    {{ form.activities_conducted.errors }}
+                                    {% render_field form.activities_conducted class+='form-control' %}
                                 </div>
                                 <div class="form-group">
-                                    <label for="website">Website</label>
-                                    {{ form.website.errors }}
-                                    {% render_field form.website class+='form-control' %}
+                                    <label for="non_aicte_courses">non_aicte_courses</label>
+                                    {{ form.non_aicte_courses.errors }}
+                                    {% render_field form.non_aicte_courses class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="approving_authority">approving_authority</label>
+                                    {{ form.approving_authority.errors }}
+                                    {% render_field form.approving_authority class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="approval_date">approval_date</label>
+                                    {{ form.approval_date.errors }}
+                                    {% render_field form.approval_date class+='form-control' %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="approval_number">approval_number</label>
+                                    {{ form.approval_number.errors }}
+                                    {% render_field form.approval_number class+='form-control' %}
                                 </div>
                             </div> <!-- /.col -->
-                        <!--</div> <!-- /.row  -->
-                        <!--{% endwith %} -->
+                        </div> <!-- /.row  -->
+                        {% endwith %}
                         <input class="btn btn-lg btn-primary col-lg-2" type="submit">
                     </form>
                 </div>

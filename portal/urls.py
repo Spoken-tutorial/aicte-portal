@@ -4,7 +4,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'aicte.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^test/$', 'portal.views.test', name='test'),
     url(r'^$', 'portal.views.home', name='home'),
     url(r'^application/(\d+)/$', 'portal.views.application_year', name='application_year'),
     url(r'^extension/$', 'portal.views.extension', name='extension'),
